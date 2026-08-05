@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { View, Text, Pressable, Dimensions } from "react-native";
+import { useEffect, useMemo } from "react";
+import { View, Text, Pressable, useWindowDimensions } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, withDelay, withSpring, Easing, withRepeat } from "react-native-reanimated";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "@/constants/theme";
@@ -7,21 +7,26 @@ import CountUp from "@/components/ui/CountUp";
 import Mascot from "@/components/Mascot";
 import { feedback } from "@/lib/feedback";
 
-const { width } = Dimensions.get("window");
 const COLORS = ["#8B5CF6", "#7CC242", "#F6B93B", "#4AA3E0", "#E24B4B", "#F39C3D"];
 
-function Confetti({ i }: { i: number }) {
+function Confetti({ i, width }: { i: number; width: number }) {
   const t = useSharedValue(0);
+  // Read at render, not at import: a module-scope Dimensions.get() is captured
+  // once when the bundle loads, so on a tablet rotated after launch — or a
+  // resized browser window — the confetti spread stays sized to the old
+  // screen and bunches into one corner.
+  const { drift, delay, dur, color, size } = useMemo(() => ({
+    drift: (Math.random() - 0.5) * 120,
+    delay: Math.random() * 400,
+    dur: 1600 + Math.random() * 1200,
+    color: COLORS[i % COLORS.length],
+    size: 8 + Math.random() * 8,
+  }), [i]);
   const startX = (i / 28) * width;
-  const drift = (Math.random() - 0.5) * 120;
-  const delay = Math.random() * 400;
-  const dur = 1600 + Math.random() * 1200;
-  const color = COLORS[i % COLORS.length];
-  const size = 8 + Math.random() * 8;
 
   useEffect(() => {
     t.value = withDelay(delay, withRepeat(withTiming(1, { duration: dur, easing: Easing.linear }), -1, false));
-  }, []);
+  }, [delay, dur, t]);
 
   const style = useAnimatedStyle(() => ({
     transform: [
@@ -35,7 +40,8 @@ function Confetti({ i }: { i: number }) {
   return <Animated.View style={[{ position: "absolute", top: 0, left: 0, width: size, height: size * 1.4, borderRadius: 2, backgroundColor: color }, style]} />;
 }
 
-export default function Celebration({ visible, xp = 10, onClose }: { visible: boolean; xp?: number; onClose: () => void }) {
+export default function Celebration({ visible, xp = 10, stars = 0, onClose }: { visible: boolean; xp?: number; stars?: number; onClose: () => void }) {
+  const { width } = useWindowDimensions();
   const card = useSharedValue(0);
 
   useEffect(() => {
@@ -45,7 +51,7 @@ export default function Celebration({ visible, xp = 10, onClose }: { visible: bo
     } else {
       card.value = 0;
     }
-  }, [visible]);
+  }, [visible, card]);
 
   const cardStyle = useAnimatedStyle(() => ({ opacity: card.value, transform: [{ scale: 0.7 + card.value * 0.3 }] }));
 
@@ -53,12 +59,19 @@ export default function Celebration({ visible, xp = 10, onClose }: { visible: bo
 
   return (
     <View style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, alignItems: "center", justifyContent: "center", backgroundColor: "rgba(30,30,50,0.45)" }}>
-      {Array.from({ length: 28 }).map((_, i) => <Confetti key={i} i={i} />)}
+      {Array.from({ length: 28 }).map((_, i) => <Confetti key={i} i={i} width={width} />)}
 
       <Animated.View style={[cardStyle, { width: "84%", maxWidth: 380, backgroundColor: "#fff", borderRadius: 28, padding: 24, alignItems: "center" }]}>
         <Mascot size={96} pose="trophy" />
         <Text style={{ fontSize: 24, fontWeight: "900", color: colors.purple, marginTop: 8 }}>Madalla! 🎉</Text>
         <Text style={{ fontSize: 14, color: colors.inkSoft, marginTop: 4, textAlign: "center" }}>Ka kammala darasi! · Lesson complete!</Text>
+
+        {/* the stars actually earned on this attempt (PRD §3.5: 1-3, never zero) */}
+        <View style={{ flexDirection: "row", gap: 4, marginTop: 12 }}>
+          {[0, 1, 2].map((i) => (
+            <Ionicons key={i} name={i < stars ? "star" : "star-outline"} size={30} color={colors.gold} />
+          ))}
+        </View>
 
         <View style={{ flexDirection: "row", alignItems: "center", gap: 8, marginTop: 16, backgroundColor: colors.purpleSoft, paddingHorizontal: 20, paddingVertical: 10, borderRadius: 999 }}>
           <Ionicons name="star" size={22} color={colors.gold} />

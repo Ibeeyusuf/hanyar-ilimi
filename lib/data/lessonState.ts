@@ -1,5 +1,6 @@
 import { getProgress, LessonProgress } from "./index";
 import { getLessons, MODULES, SUBJECTS } from "@/constants/content";
+import { isAlwaysOpen, lockStates, moduleLockStates, percentage } from "./rules";
 
 /**
  * Turns a child's stored progress into the state the UI shows.
@@ -18,32 +19,46 @@ export async function getLessonStates(childId: string | null, subject: string, m
   const progress: LessonProgress[] = childId ? await getProgress(childId) : [];
   const byLesson = new Map(progress.map((p) => [p.lessonId, p]));
 
-  // PRD §3.1 — the academic strands unlock sequentially, but Tsafta (hygiene)
-  // is a flat list with everything open: a child should be able to learn to
-  // wash their hands on day one without finishing a lesson sequence first.
-  const alwaysOpen = subject === "hygiene";
+  const passed = lessons.map((l) => !!byLesson.get(`${moduleId}/${l.id}`)?.completedAt);
+  const locks = lockStates(passed, isAlwaysOpen(subject));
 
-  let previousPassed = true;                       // first lesson always open
-  return lessons.map((l) => {
-    const key = `${moduleId}/${l.id}`;
-    const p = byLesson.get(key);
-    const done = !!p?.completedAt;
-    const state: LessonState = {
-      id: l.id, num: l.num, ha: l.ha, en: l.en,
-      stars: p?.stars ?? 0,
-      done,
-      locked: alwaysOpen ? false : !previousPassed,
-    };
-    previousPassed = done;
-    return state;
-  });
+  return lessons.map((l, i) => ({
+    id: l.id, num: l.num, ha: l.ha, en: l.en,
+    stars: byLesson.get(`${moduleId}/${l.id}`)?.stars ?? 0,
+    done: passed[i],
+    locked: locks[i],
+  }));
+}
+
+/**
+ * Real state for every module in a subject — percentage complete, stars, and
+ * sequential unlock. Module cards previously read a hardcoded `progress`
+ * number from content.ts, so they showed 75% to a child who had done nothing.
+ * Module N opens once the child has passed at least one lesson of module N-1;
+ * hygiene is flat and always open (PRD §3.1).
+ */
+export type ModuleState = { id: string; num: number; en: string; ha: string; icon?: string; percent: number; stars: number; locked: boolean };
+
+export async function getModuleStates(childId: string | null, subject: string): Promise<ModuleState[]> {
+  const mods = MODULES[subject] ?? [];
+  const perModule: LessonState[][] = [];
+  for (const m of mods) perModule.push(await getLessonStates(childId, subject, m.id));
+
+  const donePerModule = perModule.map((states) => states.filter((s) => s.done).length);
+  const locks = moduleLockStates(donePerModule, isAlwaysOpen(subject));
+
+  return mods.map((m, i) => ({
+    id: m.id, num: m.num, en: m.en, ha: m.ha, icon: m.icon,
+    percent: percentage(donePerModule[i], perModule[i].length),
+    stars: perModule[i].reduce((a, s) => a + s.stars, 0),
+    locked: locks[i],
+  }));
 }
 
 /** Percentage of a module's lessons the child has passed. */
 export async function getModuleProgress(childId: string | null, subject: string, moduleId: string): Promise<number> {
   const states = await getLessonStates(childId, subject, moduleId);
-  if (!states.length) return 0;
-  return Math.round((states.filter((s) => s.done).length / states.length) * 100);
+  return percentage(states.filter((s) => s.done).length, states.length);
 }
 
 /** Total stars a child has earned across everything. */
@@ -63,14 +78,17 @@ export async function getSubjectSummary(childId: string | null, subject: string)
     done += states.filter((s) => s.done).length;
     stars += states.reduce((s, x) => s + x.stars, 0);
   }
-  return { done, total, stars, percent: total ? Math.round((done / total) * 100) : 0 };
+  return { done, total, stars, percent: percentage(done, total) };
 }
+
+export type SubjectSummary = Awaited<ReturnType<typeof getSubjectSummary>>;
 
 /** The next lesson a child should continue with (PRD FR-4.1: resume). */
 export async function getNextLesson(childId: string | null, subject: string) {
-  for (const m of MODULES[subject] ?? []) {
+  for (const m of await getModuleStates(childId, subject)) {
+    if (m.locked) break;                           // never resume into a locked module
     const states = await getLessonStates(childId, subject, m.id);
-    const next = states.find((s) => !s.done);
+    const next = states.find((s) => !s.done && !s.locked);
     if (next) return { moduleId: m.id, lessonId: next.id, moduleName: m.en };
   }
   return null;
@@ -78,7 +96,7 @@ export async function getNextLesson(childId: string | null, subject: string) {
 
 /** Overall summary across all three strands. */
 export async function getOverallSummary(childId: string | null) {
-  const out: Record<string, Awaited<ReturnType<typeof getSubjectSummary>>> = {};
+  const out: Record<string, SubjectSummary> = {};
   for (const s of SUBJECTS) out[s.id] = await getSubjectSummary(childId, s.id);
   return out;
 }

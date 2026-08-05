@@ -1,0 +1,15 @@
+{
+  "//": "Compiles only the pure, dependency-free modules so `npm test` can run them in plain node. Not used by the app build.",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": ".tmp-test",
+    "rootDir": ".",
+    "module": "es2022",
+    "target": "es2022",
+    "moduleResolution": "bundler",
+    "noEmit": false,
+    "jsx": "react-jsx",
+    "types": []
+  },
+  "include": ["lib/data/rules.ts", "lib/clipKey.ts"]
+}

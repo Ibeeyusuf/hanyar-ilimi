@@ -3,6 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams, useFocusEffect } from "expo-router";
 import { useEffect, useState, useCallback } from "react";
 import { speak } from "@/lib/speech";
+import { PHRASES } from "@/constants/phrases";
 import { colors, NAV } from "@/constants/theme";
 import { SUBJECTS, MODULES } from "@/constants/content";
 import { getSessionChildId, getLessonStates, type LessonState } from "@/lib/data";
@@ -12,7 +13,7 @@ const CARD_TINT = ["#EAF6E0", "#FBF3DC", "#F5EAF9", "#FCE9EC", "#E7F1FB", "#FBF3
 
 export default function ModuleLessonsScreen() {
   // FR-1.2: speak the screen instruction on load
-  useEffect(() => { speak("Zabi darasi da kake so"); }, []);
+  useEffect(() => { speak(PHRASES.chooseALesson); }, []);
   const { subject, module } = useLocalSearchParams<{ subject: string; module: string }>();
   const meta = SUBJECTS.find((s) => s.id === subject) ?? SUBJECTS[0];
   const modMeta = MODULES[meta.id]?.find((m) => m.id === module);
@@ -77,15 +78,9 @@ export default function ModuleLessonsScreen() {
             <Ionicons name="arrow-back" size={16} color={colors.ink} />
             <Text className="text-[13px] font-bold" style={{ color: colors.ink }}>BAYA</Text>
           </Pressable>
-          <View className="flex-row items-center gap-1.5">
-            {[0, 1, 2, 3, 4].map((d) => (
-              <View key={d} className="h-2 rounded-full" style={{ width: d === 0 ? 18 : 8, backgroundColor: d === 0 ? colors.purple : colors.line }} />
-            ))}
-          </View>
-          <Pressable className="flex-row items-center gap-2 rounded-full px-5 py-2.5" style={{ backgroundColor: colors.purpleSoft }}>
-            <Text className="text-[13px] font-bold" style={{ color: colors.purpleDeep }}>GABA</Text>
-            <Ionicons name="arrow-forward" size={16} color={colors.purpleDeep} />
-          </Pressable>
+          <Text className="text-[12px] font-bold" style={{ color: colors.inkSoft }}>
+            {lessons.filter((l) => l.done).length} / {lessons.length} an kammala
+          </Text>
         </View>
       </ScrollView>
     </AppShell>

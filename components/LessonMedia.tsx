@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { View, Text, Pressable, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useVideoPlayer, VideoView } from "expo-video";
-import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withTiming, Easing, withSequence } from "react-native-reanimated";
+import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withTiming, Easing } from "react-native-reanimated";
 import { colors } from "@/constants/theme";
-import { speak, stopSpeaking } from "@/lib/speech";
+import { speak, speakLines, stopSpeaking } from "@/lib/speech";
 import { feedback } from "@/lib/feedback";
 
 /**
@@ -27,17 +27,23 @@ export default function LessonMedia({
   const hasVideo = !!video;
   // Hooks can't be conditional, so the player is always created; with no
   // source it simply stays idle.
-  const player = useVideoPlayer(video ?? null, (p) => { p.loop = false; });
+  // Muted deliberately. A lesson clip carries whatever narration was on the
+  // original footage, which is not Hausa, and a child hearing an English voice
+  // over a Hausa lesson learns the wrong pronunciation of the very word being
+  // taught. The picture is the useful part; the words come from the recorded
+  // Hausa clip spoken alongside it. Unmute a clip only once its own audio is
+  // Hausa.
+  const player = useVideoPlayer(video ?? null, (p) => { p.loop = false; p.muted = true; });
   const [playing, setPlaying] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const stop = () => {
+  const stop = useCallback(() => {
     if (timer.current) { clearInterval(timer.current); timer.current = null; }
     stopSpeaking();
     try { player?.pause(); } catch {}
     setPlaying(false);
-  };
+  }, [player]);
 
   // With a real clip, follow its actual playback position.
   useEffect(() => {
@@ -51,7 +57,7 @@ export default function LessonMedia({
       } catch {}
     }, 400);
     return () => clearInterval(id);
-  }, [hasVideo, playing]);
+  }, [hasVideo, playing, player, durationSec, stop]);
 
   useEffect(() => () => { if (timer.current) clearInterval(timer.current); }, []);
 
@@ -63,9 +69,11 @@ export default function LessonMedia({
     onReplay?.();                                   // FR-5.3: replay count logged
     if (hasVideo) {
       try { player.currentTime = 0; player.play(); } catch {}
+      // The clip is silent, so the Hausa line still has to be spoken over it.
+      speakLines([word, sentence ?? ""]);
       return;
     }
-    speak(sentence ? `${word}. ${sentence}` : word);
+    speakLines([word, sentence ?? ""]);
     timer.current = setInterval(() => {
       setElapsed((e) => {
         if (e + 1 >= durationSec) { stop(); return 0; }
@@ -125,7 +133,7 @@ export function AudioBar({ word, onReplay }: { word: string; onReplay?: () => vo
     } else {
       t.value = withTiming(0, { duration: 200 });
     }
-  }, [playing]);
+  }, [playing, t]);
 
   const play = () => {
     feedback.tap();

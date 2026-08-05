@@ -15,7 +15,7 @@ export default function ProgressScreen() {
   const [child, setChild] = useState<Child | null>(null);
   const [stars, setStars] = useState(0);
   const [subj, setSubj] = useState<Record<string, Sum>>({});
-  const [mods, setMods] = useState<Array<{ id: string; label: string; pct: number; color: string }>>([]);
+  const [mods, setMods] = useState<{ id: string; label: string; pct: number; color: string }[]>([]);
   const [mastery, setMastery] = useState(0);
 
   useFocusEffect(useCallback(() => {
@@ -25,7 +25,7 @@ export default function ProgressScreen() {
       const c = id ? await getChild(id) : undefined;
       const total = await getTotalStars(id);
       const s: Record<string, Sum> = {};
-      const m: Array<{ id: string; label: string; pct: number; color: string }> = [];
+      const m: { id: string; label: string; pct: number; color: string }[] = [];
       for (const sub of SUBJECTS) {
         s[sub.id] = await getSubjectSummary(id, sub.id);
         for (const mod of MODULES[sub.id] ?? []) {

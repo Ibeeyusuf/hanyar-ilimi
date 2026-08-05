@@ -4,27 +4,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import { colors } from "@/constants/theme";
 import SceneBackdrop from "@/components/SceneBackdrop";
+import StepRail from "@/components/ui/StepRail";
 import Mascot from "@/components/Mascot";
 import { SECRET_ICONS } from "@/constants/content";
 import { PASSCODE_ORDER } from "@/constants/images";
-import { verifyPasscode, loginChild, getProgress, getChild, checkFacilitatorPin } from "@/lib/data";
+import { verifyPasscode, loginChild, hasBaseline, getChildPasscode, checkFacilitatorPin } from "@/lib/data";
 import { feedback } from "@/lib/feedback";
 import { speak } from "@/lib/speech";
-
-function StepRail({ step, total = 6 }: { step: number; total?: number }) {
-  return (
-    <View className="mb-5 flex-row items-center justify-center">
-      {Array.from({ length: total }).map((_, i) => (
-        <View key={i} className="flex-row items-center">
-          <View className="h-6 w-6 items-center justify-center rounded-full" style={{ backgroundColor: i <= step ? colors.green : "#fff", borderWidth: 2, borderColor: i <= step ? colors.green : colors.line }}>
-            {i < step ? <Ionicons name="checkmark" size={12} color="#fff" /> : <Text className="text-[10px] font-bold" style={{ color: i === step ? "#fff" : colors.inkSoft }}>{i + 1}</Text>}
-          </View>
-          {i < total - 1 && <View className="h-0.5 w-6" style={{ backgroundColor: i < step ? colors.green : colors.line }} />}
-        </View>
-      ))}
-    </View>
-  );
-}
+import { PHRASES } from "@/constants/phrases";
 
 export default function SecretPicturesScreen() {
   const { childId } = useLocalSearchParams<{ childId?: string }>();
@@ -53,16 +40,13 @@ export default function SecretPicturesScreen() {
   }, []);
 
   // FR-1.2: speak the instruction on load.
-  useEffect(() => { speak("Danna hotunanka guda uku"); }, []);
+  useEffect(() => { speak(PHRASES.pickThreePictures); }, []);
 
   // Held for the facilitator override only — never rendered without the PIN.
-  useEffect(() => {
-    (async () => {
-      if (!childId) return;
-      const c = await getChild(childId);
-      setChildPasscode(c?.passcode ?? []);
-    })();
-  }, [childId]);
+  const revealPasscode = async () => {
+    if (!childId) return;
+    setChildPasscode(await getChildPasscode(childId));
+  };
 
   // Tapping a chosen picture removes it, so a child can correct a mistake
   // without leaving the screen. feedback is wrapped so a failing sound or
@@ -88,8 +72,8 @@ export default function SecretPicturesScreen() {
         await loginChild(childId);
         feedback.success();
         // New child (no progress yet) -> placement game; otherwise -> home.
-        const prog = await getProgress(childId);
-        if (prog.length === 0) router.replace({ pathname: "/facilitator/placement", params: { childId } });
+        const placed = await hasBaseline(childId);
+        if (!placed) router.replace({ pathname: "/facilitator/placement", params: { childId } });
         else router.replace("/home");
         return;
       }
@@ -99,8 +83,8 @@ export default function SecretPicturesScreen() {
       setWrongCount(w);
       // S3: after 3 wrong tries, encourage the child to fetch a facilitator.
       // No lockout, no punishment — the child can keep trying.
-      if (w >= 3) { setCallTeacher(true); speak("Ka kira malamin ka"); }
-      else speak("Ka sake gwadawa");
+      if (w >= 3) { setCallTeacher(true); speak(PHRASES.callYourTeacher); }
+      else speak(PHRASES.tryAgain);
       setTimeout(() => { setSeq([]); setError(false); }, 1800);
     } finally {
       setBusy(false);
@@ -183,7 +167,7 @@ export default function SecretPicturesScreen() {
           <View className="mt-5 flex-row items-center justify-between">
             <Pressable onPress={() => setShowPin(true)} className="flex-row items-center gap-2 rounded-2xl px-4 py-3" style={{ borderWidth: 1.5, borderColor: colors.line }}>
               <Ionicons name="call-outline" size={16} color={colors.inkSoft} />
-              <Text className="text-[12px]" style={{ color: colors.inkSoft }}>Can't remember? Call teacher</Text>
+              <Text className="text-[12px]" style={{ color: colors.inkSoft }}>Can’t remember? Call teacher</Text>
             </Pressable>
             <Pressable disabled={seq.length < 3} onPress={confirm} className="items-center rounded-2xl px-10 py-3" style={{ backgroundColor: seq.length < 3 ? colors.line : colors.purple }}>
               <Text className="text-[14px] font-black tracking-wider" style={{ color: seq.length < 3 ? colors.inkSoft : "#fff" }}>TABBATAR · CONFIRM</Text>
@@ -198,7 +182,7 @@ export default function SecretPicturesScreen() {
               {!revealed ? (
                 <View>
                   <Text className="mb-2 text-center text-[12.5px] font-bold" style={{ color: colors.purpleDeep }}>
-                    Facilitator PIN to show this child's pictures
+                    Facilitator PIN to show this child’s pictures
                   </Text>
                   <View className="flex-row items-center justify-center gap-2">
                     <TextInput
@@ -214,7 +198,7 @@ export default function SecretPicturesScreen() {
                     />
                     <Pressable
                       onPress={async () => {
-                        if (await checkFacilitatorPin(pin)) { setRevealed(true); setPin(""); }
+                        if (await checkFacilitatorPin(pin)) { await revealPasscode(); setRevealed(true); setPin(""); }
                         else { feedback.wrong(); setPin(""); }
                       }}
                       className="rounded-xl px-4 py-2.5" style={{ backgroundColor: colors.purple }}>
@@ -228,8 +212,15 @@ export default function SecretPicturesScreen() {
               ) : (
                 <View>
                   <Text className="mb-2 text-center text-[12.5px] font-bold" style={{ color: colors.purpleDeep }}>
-                    This child's pictures, in order
+                    This child’s pictures, in order
                   </Text>
+                  {childPasscode.length === 0 && (
+                    <Text className="mb-2 text-center text-[12px]" style={{ color: colors.red }}>
+                      No pictures are recorded for this child, so nothing will let them in.
+                      Set them from the facilitator dashboard: open this child’s record and
+                      choose “Change secret pictures”.
+                    </Text>
+                  )}
                   <View className="flex-row items-center justify-center gap-3">
                     {childPasscode.map((idx, k) => (
                       <View key={k} className="items-center">
@@ -241,7 +232,7 @@ export default function SecretPicturesScreen() {
                         <Text className="mt-1 text-[11px] font-bold" style={{ color: colors.inkSoft }}>{k + 1}</Text>
                       </View>
                     ))}
-                    <Pressable onPress={() => { setShowPin(false); setRevealed(false); }} className="ml-2 rounded-xl px-3 py-2.5" style={{ borderWidth: 1, borderColor: colors.line }}>
+                    <Pressable onPress={() => { setShowPin(false); setRevealed(false); setChildPasscode([]); }} className="ml-2 rounded-xl px-3 py-2.5" style={{ borderWidth: 1, borderColor: colors.line }}>
                       <Text className="text-[12.5px] font-bold" style={{ color: colors.inkSoft }}>Close</Text>
                     </Pressable>
                   </View>

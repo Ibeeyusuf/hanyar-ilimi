@@ -6,9 +6,10 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavProvider } from "@/components/nav/NavContext";
 import { useEffect } from "react";
 import { initData } from "@/lib/data";
+import { loadPrefs } from "@/lib/settings";
 
 export default function RootLayout() {
-  useEffect(() => { initData(); }, []);
+  useEffect(() => { initData(); loadPrefs(); }, []);
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>

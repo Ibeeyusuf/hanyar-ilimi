@@ -1,34 +1,20 @@
-import { View, Text, Pressable, ScrollView, useWindowDimensions, Image } from "react-native";
+import { View, Text, Pressable, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { colors } from "@/constants/theme";
 import SceneBackdrop from "@/components/SceneBackdrop";
-import { AVATARS } from "@/constants/content";
+import StepRail from "@/components/ui/StepRail";
 import { useEffect, useState } from "react";
 import { getChildren, Child } from "@/lib/data";
 import { speak } from "@/lib/speech";
-import { avatarSet } from "@/constants/images";
-
-function StepRail({ step, total = 6 }: { step: number; total?: number }) {
-  return (
-    <View className="mb-5 flex-row items-center justify-center">
-      {Array.from({ length: total }).map((_, i) => (
-        <View key={i} className="flex-row items-center">
-          <View className="h-6 w-6 items-center justify-center rounded-full" style={{ backgroundColor: i <= step ? colors.green : "#fff", borderWidth: 2, borderColor: i <= step ? colors.green : colors.line }}>
-            {i < step ? <Ionicons name="checkmark" size={12} color="#fff" /> : <Text className="text-[10px] font-bold" style={{ color: i === step ? "#fff" : colors.inkSoft }}>{i + 1}</Text>}
-          </View>
-          {i < total - 1 && <View className="h-0.5 w-6" style={{ backgroundColor: i < step ? colors.green : colors.line }} />}
-        </View>
-      ))}
-    </View>
-  );
-}
+import { PHRASES } from "@/constants/phrases";
+import ChildPortrait from "@/components/ChildPortrait";
 
 export default function PhotoSelectScreen() {
   const [children, setChildren] = useState<Child[]>([]);
   useEffect(() => {
     getChildren().then(setChildren);
-    speak("Danna hotonka");
+    speak(PHRASES.pickYourPhoto);
   }, []);
 
   // Each child must be instantly distinguishable — she picks HER OWN picture
@@ -47,18 +33,14 @@ export default function PhotoSelectScreen() {
           </Text>
 
           <View className="rounded-2xl p-4" style={{ backgroundColor: "#EAF4FB" }}>
-            <Text className="mb-3 text-center text-[13px] font-bold" style={{ color: colors.ink }}>Pick my photo — only this tablet's children</Text>
+            <Text className="mb-3 text-center text-[13px] font-bold" style={{ color: colors.ink }}>Pick my photo — only this tablet’s children</Text>
             <View className="flex-row flex-wrap justify-center gap-4">
               {children.map((c, i) => {
                 const ring = RING[i % RING.length];
-                const face = avatarSet[i % avatarSet.length];
                 return (
                   <Pressable key={c.id} onPress={() => router.push({ pathname: "/(auth)/secret-pictures", params: { childId: c.id } })}
                     className="items-center gap-1.5">
-                    <View className="items-center justify-center overflow-hidden rounded-full"
-                      style={{ height: 96, width: 96, backgroundColor: "#fff", borderWidth: 4, borderColor: ring }}>
-                      <Image source={face} style={{ width: 96, height: 96 }} resizeMode="cover" />
-                    </View>
+                    <ChildPortrait child={c} size={96} ringColor={ring} />
                     <Text className="text-[13px] font-bold" style={{ color: colors.ink }}>{c.name}</Text>
                   </Pressable>
                 );

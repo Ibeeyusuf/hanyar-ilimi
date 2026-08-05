@@ -1,19 +1,26 @@
-import { View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { characters } from "@/constants/images";
-import { colors } from "@/constants/theme";
 
-// The app's single guide character. Uses the designer's caterpillar art when
-// present; until then shows a clean, minimal placeholder (no busy vectors).
-export default function Mascot({ size = 72 }: { size?: number; pose?: string }) {
-  if (characters.mascot) {
-    return <Image source={characters.mascot} style={{ width: size, height: size }} contentFit="contain" transition={200} />;
-  }
-  // clean placeholder — a soft rounded tile with a friendly face icon
+/**
+ * The app's guide character. `pose` was previously accepted and ignored, so
+ * every call site rendered the same caterpillar; it now selects from the
+ * artwork that actually ships with the app.
+ */
+export type MascotPose = "default" | "trophy" | "thumbsup";
+
+const ART: Record<MascotPose, any> = {
+  default: characters.caterpillar,
+  trophy: characters.ladybug,
+  thumbsup: characters.bee,
+};
+
+export default function Mascot({ size = 72, pose = "default" }: { size?: number; pose?: MascotPose }) {
   return (
-    <View style={{ width: size, height: size, borderRadius: size * 0.28, backgroundColor: colors.greenSoft ?? "#E7F4DC", alignItems: "center", justifyContent: "center" }}>
-      <Ionicons name="happy" size={size * 0.55} color={colors.green ?? "#7CC242"} />
-    </View>
+    <Image
+      source={ART[pose] ?? ART.default}
+      style={{ width: size, height: size }}
+      contentFit="contain"
+      transition={200}
+    />
   );
 }

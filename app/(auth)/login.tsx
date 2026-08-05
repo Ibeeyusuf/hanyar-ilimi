@@ -9,6 +9,7 @@ import LoginScene from "@/components/LoginScene";
 import Logo from "@/components/brand/Logo";
 import Mascot from "@/components/Mascot";
 import { speak } from "@/lib/speech";
+import { PHRASES } from "@/constants/phrases";
 import { feedback } from "@/lib/feedback";
 
 /**
@@ -26,7 +27,7 @@ export default function WelcomeScreen() {
   const idleTimer = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    const greet = () => speak("Sannu! Danna don farawa.");
+    const greet = () => speak(PHRASES.welcome);
     greet();
     // FR-1.2 asks for a reminder if the child hesitates — but only a couple,
     // not an endless loop. Repeating forever is irritating and, on a shared
@@ -47,7 +48,7 @@ export default function WelcomeScreen() {
         withTiming(1.0, { duration: 900, easing: Easing.inOut(Easing.ease) })
       ), -1, false);
     return () => { if (idleTimer.current) clearInterval(idleTimer.current); };
-  }, []);
+  }, [pulse]);
 
   const start = () => {
     if (idleTimer.current) clearInterval(idleTimer.current);
@@ -85,7 +86,7 @@ export default function WelcomeScreen() {
             </Pressable>
           </Animated.View>
 
-          <Pressable onPress={() => speak("Sannu! Danna don farawa.")} className="mt-4 flex-row items-center gap-2" hitSlop={10}>
+          <Pressable onPress={() => speak(PHRASES.welcome)} className="mt-4 flex-row items-center gap-2" hitSlop={10}>
             <Ionicons name="volume-high" size={18} color={colors.purple} />
             <Text className="text-[13px] font-bold" style={{ color: colors.purple }}>Sake saurara · Hear again</Text>
           </Pressable>

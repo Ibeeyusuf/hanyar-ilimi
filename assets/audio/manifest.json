@@ -1,0 +1,4125 @@
+{
+  "generatedAt": "2026-08-05",
+  "normalisation": "collapse whitespace, trim, lowercase",
+  "idAlgorithm": "sha1(normalised text) truncated to 12 hex chars",
+  "language": "ha",
+  "count": 558,
+  "clips": [
+    {
+      "id": "798cb5547fb6",
+      "text": "1, 2, 3, …, 5.",
+      "sources": [
+        "numeracy/games/puzzle:prompt"
+      ]
+    },
+    {
+      "id": "e96bd0e54b87",
+      "text": "10 − 3 = ….",
+      "sources": [
+        "numeracy/subtraction/sub-ten:prompt"
+      ]
+    },
+    {
+      "id": "e77ba7955d7d",
+      "text": "2 + 1 = ….",
+      "sources": [
+        "numeracy/addition/add-1:prompt"
+      ]
+    },
+    {
+      "id": "cde8786648e8",
+      "text": "3 + 2 = ….",
+      "sources": [
+        "numeracy/addition/add-small:prompt"
+      ]
+    },
+    {
+      "id": "b0b7655dc4d2",
+      "text": "5 + 5 = ….",
+      "sources": [
+        "numeracy/addition/add-fast:prompt"
+      ]
+    },
+    {
+      "id": "7f746178a2d8",
+      "text": "5 − 1 = ….",
+      "sources": [
+        "numeracy/subtraction/sub-1:prompt"
+      ]
+    },
+    {
+      "id": "a08e65b01cf2",
+      "text": "6 + 4 = ….",
+      "sources": [
+        "numeracy/addition/add-ten:prompt"
+      ]
+    },
+    {
+      "id": "2ab03b06e6dd",
+      "text": "9 − 4 = ….",
+      "sources": [
+        "numeracy/subtraction/sub-fast:prompt"
+      ]
+    },
+    {
+      "id": "86f7e437faa5",
+      "text": "A",
+      "sources": [
+        "literacy/reading/letters:word",
+        "literacy/reading/letters:option"
+      ]
+    },
+    {
+      "id": "d45ffe681569",
+      "text": "A cikin aji, taga tana da siffar ….",
+      "sources": [
+        "numeracy/games/shape-hunt:prompt"
+      ]
+    },
+    {
+      "id": "48835be911a8",
+      "text": "A labaran Hausa, Gizo yana da wayo sosai.",
+      "sources": [
+        "literacy/story/spider:hint"
+      ]
+    },
+    {
+      "id": "d32125f6fb21",
+      "text": "A tseren ƙidaya, muna ƙidaya daga ɗaya zuwa ….",
+      "sources": [
+        "numeracy/games/count-race:prompt"
+      ]
+    },
+    {
+      "id": "fe4c22f88d9b",
+      "text": "A wasan ƙari: 2 + 3 = ….",
+      "sources": [
+        "numeracy/games/add-game:prompt"
+      ]
+    },
+    {
+      "id": "318a1210eef2",
+      "text": "Abinci",
+      "sources": [
+        "literacy/grammar/sentence2:option",
+        "hygiene/clothes/clean-clothes:option",
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "36cddf32f82d",
+      "text": "Abinci iri ɗaya kaɗai bai isa jiki ba.",
+      "sources": [
+        "hygiene/food/healthy-eating:hint"
+      ]
+    },
+    {
+      "id": "de7c84a212fd",
+      "text": "Abinci mai kyau",
+      "sources": [
+        "hygiene/food/good-food:word",
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "77bcceed82e7",
+      "text": "Abinci mai kyau yana ba mu ….",
+      "sources": [
+        "hygiene/food/good-food:prompt"
+      ]
+    },
+    {
+      "id": "0dce329684d7",
+      "text": "Agogo",
+      "sources": [
+        "numeracy/shapes/shapes-around:word"
+      ]
+    },
+    {
+      "id": "9b7450fb080a",
+      "text": "Agogo yana da siffar ….",
+      "sources": [
+        "numeracy/shapes/shapes-around:prompt"
+      ]
+    },
+    {
+      "id": "0474aee45985",
+      "text": "Ak",
+      "sources": [
+        "literacy/reading/syllables:option"
+      ]
+    },
+    {
+      "id": "53093b7a49dc",
+      "text": "Akuya",
+      "sources": [
+        "literacy/story/goat:word",
+        "literacy/story/lion:option"
+      ]
+    },
+    {
+      "id": "14398f3c40cf",
+      "text": "Akuya biyar, uku sun fita. Sun rage ….",
+      "sources": [
+        "numeracy/subtraction/sub-story:prompt"
+      ]
+    },
+    {
+      "id": "24db8b3bcafa",
+      "text": "Akuya da Kura",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "3558b1c218f8",
+      "text": "Akuya ta yi hankali, ta tsere zuwa gida.",
+      "sources": [
+        "literacy/story/goat:hint"
+      ]
+    },
+    {
+      "id": "56e367d0d80b",
+      "text": "Alamar tsayawa (.) tana nuna jimla ta ƙare.",
+      "sources": [
+        "literacy/writing/write-sentence:hint"
+      ]
+    },
+    {
+      "id": "03409b67b399",
+      "text": "Alewa",
+      "sources": [
+        "hygiene/teeth/sugar:word",
+        "hygiene/teeth/sugar:option",
+        "hygiene/food/fruits:option"
+      ]
+    },
+    {
+      "id": "01ec0e3dec2d",
+      "text": "Alƙalami",
+      "sources": [
+        "literacy/writing/hold-pen:word",
+        "literacy/writing/hold-pen:option"
+      ]
+    },
+    {
+      "id": "c66fce99e349",
+      "text": "Alwatika",
+      "sources": [
+        "numeracy/shapes/circle:option",
+        "numeracy/shapes/square:option",
+        "numeracy/shapes/triangle:word",
+        "numeracy/shapes/triangle:option",
+        "numeracy/shapes/rectangle:option",
+        "numeracy/shapes/match-shapes:option",
+        "numeracy/shapes/shapes-around:option",
+        "numeracy/games/shape-hunt:option",
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "df55b05e58ab",
+      "text": "Amfani",
+      "sources": [
+        "literacy/story/farmer:option"
+      ]
+    },
+    {
+      "id": "d32a209336a9",
+      "text": "Amfani da Sabulu",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "00b08a60bb5a",
+      "text": "Aminu",
+      "sources": [
+        "literacy/reading/story:option"
+      ]
+    },
+    {
+      "id": "80f641e89d7b",
+      "text": "Aminu da Zara yara ne. Suna cewa “Sannu!”",
+      "sources": [
+        "literacy/grammar/people:hint"
+      ]
+    },
+    {
+      "id": "bb6d7d50f222",
+      "text": "Apple huɗu da apple uku su ne ….",
+      "sources": [
+        "numeracy/addition/add-objects:prompt"
+      ]
+    },
+    {
+      "id": "d02d7b3a9603",
+      "text": "Apple shida, an ci biyu. Sun rage ….",
+      "sources": [
+        "numeracy/subtraction/take-away:prompt"
+      ]
+    },
+    {
+      "id": "1f09676c3c43",
+      "text": "ashirin",
+      "sources": [
+        "number:20",
+        "numeracy/counting/twenty:word",
+        "numeracy/counting/twenty:option"
+      ]
+    },
+    {
+      "id": "32ff04e99371",
+      "text": "Aya (.)",
+      "sources": [
+        "literacy/writing/write-sentence:option"
+      ]
+    },
+    {
+      "id": "6c0596b8ac60",
+      "text": "Ba",
+      "sources": [
+        "literacy/reading/sounds:word",
+        "literacy/reading/sounds:option"
+      ]
+    },
+    {
+      "id": "3ce566d7909d",
+      "text": "Babban",
+      "sources": [
+        "literacy/writing/write-name:option"
+      ]
+    },
+    {
+      "id": "22ad037450fd",
+      "text": "Babban yatsa da na gaba su riƙe shi, na uku ya taimaka.",
+      "sources": [
+        "literacy/writing/hold-pen:hint"
+      ]
+    },
+    {
+      "id": "60bdd2faebc5",
+      "text": "bakwai",
+      "sources": [
+        "number:7",
+        "numeracy/counting/count-things:option",
+        "numeracy/counting/order:option",
+        "numeracy/addition/add-objects:word",
+        "numeracy/addition/add-objects:option",
+        "numeracy/subtraction/sub-ten:word",
+        "numeracy/subtraction/sub-ten:option",
+        "numeracy/games/number-match:option",
+        "numeracy/games/memory:option"
+      ]
+    },
+    {
+      "id": "17c79d16dec6",
+      "text": "bakwai da bakwai",
+      "sources": [
+        "addition:7+7"
+      ]
+    },
+    {
+      "id": "07b1a762d3d8",
+      "text": "bakwai da biyar",
+      "sources": [
+        "addition:7+5"
+      ]
+    },
+    {
+      "id": "158ca9a8552c",
+      "text": "bakwai da biyu",
+      "sources": [
+        "addition:7+2"
+      ]
+    },
+    {
+      "id": "2a8679128615",
+      "text": "bakwai da ɗaya",
+      "sources": [
+        "addition:7+1"
+      ]
+    },
+    {
+      "id": "592c224619f6",
+      "text": "bakwai da goma",
+      "sources": [
+        "addition:7+10"
+      ]
+    },
+    {
+      "id": "25a6ce940307",
+      "text": "bakwai da huɗu",
+      "sources": [
+        "addition:7+4"
+      ]
+    },
+    {
+      "id": "3a1ffe8f6c6d",
+      "text": "bakwai da shida",
+      "sources": [
+        "addition:7+6"
+      ]
+    },
+    {
+      "id": "dc74795d5e07",
+      "text": "bakwai da takwas",
+      "sources": [
+        "addition:7+8"
+      ]
+    },
+    {
+      "id": "4a1a5311ec4f",
+      "text": "bakwai da tara",
+      "sources": [
+        "addition:7+9"
+      ]
+    },
+    {
+      "id": "584fbc8f6dab",
+      "text": "bakwai da uku",
+      "sources": [
+        "addition:7+3"
+      ]
+    },
+    {
+      "id": "fb72dcb0ecd9",
+      "text": "Baƙaƙe da Wasali",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "a9833ef062de",
+      "text": "Baƙi",
+      "sources": [
+        "literacy/vocab/colors:option"
+      ]
+    },
+    {
+      "id": "6285be9845c3",
+      "text": "Baƙi da wasali sun haɗu su zama gaɓa ɗaya.",
+      "sources": [
+        "literacy/reading/syllables:hint"
+      ]
+    },
+    {
+      "id": "aa9427f26c28",
+      "text": "Baƙi K da wasali A suna ba mu ….",
+      "sources": [
+        "literacy/reading/syllables:prompt"
+      ]
+    },
+    {
+      "id": "243e510cb57e",
+      "text": "Baƙo",
+      "sources": [
+        "literacy/vocab/family:option"
+      ]
+    },
+    {
+      "id": "5972ed98f12f",
+      "text": "Bambanci",
+      "sources": [
+        "numeracy/subtraction/diff:word",
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "ce9a5aeb8061",
+      "text": "Bambanci shi ne nawa babba ya fi ƙarami.",
+      "sources": [
+        "numeracy/subtraction/diff:hint"
+      ]
+    },
+    {
+      "id": "3a6ea877743b",
+      "text": "Bambanci tsakanin 8 da 5 shi ne ….",
+      "sources": [
+        "numeracy/subtraction/diff:prompt"
+      ]
+    },
+    {
+      "id": "6a1d7e3329f0",
+      "text": "Barci",
+      "sources": [
+        "literacy/grammar/actions:option",
+        "literacy/story/farmer:option",
+        "hygiene/handwash/when:option",
+        "hygiene/teeth/smile:option",
+        "hygiene/food/good-food:option"
+      ]
+    },
+    {
+      "id": "ae8b2e86df2f",
+      "text": "Bayan bakwai sai takwas.",
+      "sources": [
+        "numeracy/counting/six-ten:hint"
+      ]
+    },
+    {
+      "id": "54c1cee015bd",
+      "text": "Bayan goma sha tara sai ashirin.",
+      "sources": [
+        "numeracy/counting/twenty:hint"
+      ]
+    },
+    {
+      "id": "4d7a8f2be913",
+      "text": "Bayan sabulu, ka goge hannu sannan ka ….",
+      "sources": [
+        "hygiene/handwash/steps:prompt"
+      ]
+    },
+    {
+      "id": "e77a457059ff",
+      "text": "Bayan sun bushe, muna naɗe tufafi mu ajiye a ….",
+      "sources": [
+        "hygiene/clothes/fold:prompt"
+      ]
+    },
+    {
+      "id": "440dd1546119",
+      "text": "Bayan wankewa, muna bushe hannu da ….",
+      "sources": [
+        "hygiene/handwash/dry:prompt"
+      ]
+    },
+    {
+      "id": "94e844e57e25",
+      "text": "Bayan wasa a ƙasa, muna wanke ….",
+      "sources": [
+        "hygiene/body/feet:prompt"
+      ]
+    },
+    {
+      "id": "ac01090bd8a3",
+      "text": "Bi Haruffa",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "a901c6cddf79",
+      "text": "biyar",
+      "sources": [
+        "number:5",
+        "numeracy/counting/one-five:option",
+        "numeracy/counting/order:option",
+        "numeracy/addition/add-small:word",
+        "numeracy/addition/add-small:option",
+        "numeracy/addition/add-story:word",
+        "numeracy/addition/add-story:option",
+        "numeracy/addition/add-fast:option",
+        "numeracy/subtraction/sub-1:option",
+        "numeracy/subtraction/sub-story:option",
+        "numeracy/subtraction/diff:option",
+        "numeracy/subtraction/sub-fast:word",
+        "numeracy/subtraction/sub-fast:option",
+        "numeracy/games/add-game:option"
+      ]
+    },
+    {
+      "id": "21ce438d8d14",
+      "text": "biyar da bakwai",
+      "sources": [
+        "addition:5+7"
+      ]
+    },
+    {
+      "id": "9657d57171b0",
+      "text": "biyar da biyar",
+      "sources": [
+        "addition:5+5"
+      ]
+    },
+    {
+      "id": "9237c55a8a65",
+      "text": "biyar da biyu",
+      "sources": [
+        "addition:5+2"
+      ]
+    },
+    {
+      "id": "ae33110dee5f",
+      "text": "biyar da ɗaya",
+      "sources": [
+        "addition:5+1"
+      ]
+    },
+    {
+      "id": "e064f5258f77",
+      "text": "biyar da goma",
+      "sources": [
+        "addition:5+10"
+      ]
+    },
+    {
+      "id": "992e828f8b45",
+      "text": "biyar da huɗu",
+      "sources": [
+        "addition:5+4"
+      ]
+    },
+    {
+      "id": "cc9a900ba911",
+      "text": "biyar da shida",
+      "sources": [
+        "addition:5+6"
+      ]
+    },
+    {
+      "id": "9249b26ebf92",
+      "text": "biyar da takwas",
+      "sources": [
+        "addition:5+8"
+      ]
+    },
+    {
+      "id": "e27a78a7f586",
+      "text": "biyar da tara",
+      "sources": [
+        "addition:5+9"
+      ]
+    },
+    {
+      "id": "81783bd19d81",
+      "text": "biyar da uku",
+      "sources": [
+        "addition:5+3"
+      ]
+    },
+    {
+      "id": "d0df5275aecb",
+      "text": "Biyar ya fi … yawa.",
+      "sources": [
+        "numeracy/counting/more-less:prompt"
+      ]
+    },
+    {
+      "id": "8aeceda873f5",
+      "text": "biyu",
+      "sources": [
+        "number:2",
+        "numeracy/counting/count-things:option",
+        "numeracy/counting/more-less:option",
+        "numeracy/addition/add-1:option",
+        "numeracy/subtraction/sub-story:option",
+        "numeracy/games/number-match:option",
+        "numeracy/games/puzzle:option"
+      ]
+    },
+    {
+      "id": "1fcdd076c4fd",
+      "text": "biyu da bakwai",
+      "sources": [
+        "addition:2+7"
+      ]
+    },
+    {
+      "id": "227df745d925",
+      "text": "biyu da biyar",
+      "sources": [
+        "addition:2+5"
+      ]
+    },
+    {
+      "id": "5fe7ef4b3ae1",
+      "text": "biyu da biyu",
+      "sources": [
+        "addition:2+2"
+      ]
+    },
+    {
+      "id": "0670de25c346",
+      "text": "biyu da ɗaya",
+      "sources": [
+        "addition:2+1"
+      ]
+    },
+    {
+      "id": "0a48db75e560",
+      "text": "biyu da goma",
+      "sources": [
+        "addition:2+10"
+      ]
+    },
+    {
+      "id": "c2fcae741c57",
+      "text": "biyu da huɗu",
+      "sources": [
+        "addition:2+4"
+      ]
+    },
+    {
+      "id": "72815dcfa9d7",
+      "text": "biyu da shida",
+      "sources": [
+        "addition:2+6"
+      ]
+    },
+    {
+      "id": "4c66a6db7410",
+      "text": "biyu da takwas",
+      "sources": [
+        "addition:2+8"
+      ]
+    },
+    {
+      "id": "5a11d51b0ed9",
+      "text": "biyu da tara",
+      "sources": [
+        "addition:2+9"
+      ]
+    },
+    {
+      "id": "47731a8162ff",
+      "text": "biyu da uku",
+      "sources": [
+        "addition:2+3"
+      ]
+    },
+    {
+      "id": "5d0c05d543a5",
+      "text": "Buroshi",
+      "sources": [
+        "hygiene/teeth/why-brush:word",
+        "hygiene/teeth/why-brush:option"
+      ]
+    },
+    {
+      "id": "40174ab43991",
+      "text": "Buroshi da Man Goge Baki",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "2ec92cab5218",
+      "text": "Buroshi yana cire saura abinci daga hakori.",
+      "sources": [
+        "hygiene/teeth/why-brush:hint"
+      ]
+    },
+    {
+      "id": "38b986af2c61",
+      "text": "Bushe Hannu",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "3f7766056fbf",
+      "text": "Ɓace",
+      "sources": [
+        "literacy/story/birds:option"
+      ]
+    },
+    {
+      "id": "993a425f463f",
+      "text": "Ɓera ƙarami ne, amma ya ceci ….",
+      "sources": [
+        "literacy/story/lion:prompt"
+      ]
+    },
+    {
+      "id": "c7c3c669d73a",
+      "text": "Ɓoye su",
+      "sources": [
+        "hygiene/food/wash-food:option"
+      ]
+    },
+    {
+      "id": "5c216edef3e5",
+      "text": "Canza Tufafi",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "5f6ca5efc751",
+      "text": "Canzawa",
+      "sources": [
+        "hygiene/clothes/change:word"
+      ]
+    },
+    {
+      "id": "5054dc5dc718",
+      "text": "Ci abinci",
+      "sources": [
+        "hygiene/handwash/steps:option"
+      ]
+    },
+    {
+      "id": "1a465e17e680",
+      "text": "Cikin Gida",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "3cad2f142031",
+      "text": "Cin … da yawa yana ɓata hakori.",
+      "sources": [
+        "hygiene/teeth/sugar:prompt"
+      ]
+    },
+    {
+      "id": "4b4d4b75db11",
+      "text": "Cin abinci",
+      "sources": [
+        "hygiene/handwash/when:option"
+      ]
+    },
+    {
+      "id": "b81bcc914e86",
+      "text": "Cin Abinci Lafiya",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "5573a20d41d6",
+      "text": "Cin lafiya",
+      "sources": [
+        "hygiene/food/healthy-eating:word"
+      ]
+    },
+    {
+      "id": "eea326f82c2f",
+      "text": "Cire abin da ya tafi daga adadin farko.",
+      "sources": [
+        "numeracy/subtraction/take-away:hint"
+      ]
+    },
+    {
+      "id": "b346cb3bee95",
+      "text": "Cire Abubuwa",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "9b8b2d69705b",
+      "text": "Cire ɗaya yana nufin ka koma baya lamba ɗaya.",
+      "sources": [
+        "numeracy/subtraction/sub-1:hint"
+      ]
+    },
+    {
+      "id": "7d4e5d6a0f7a",
+      "text": "Ciwo",
+      "sources": [
+        "hygiene/teeth/smile:option",
+        "hygiene/body/healthy-body:option",
+        "hygiene/food/good-food:option"
+      ]
+    },
+    {
+      "id": "c8523c5f57b7",
+      "text": "Cokali",
+      "sources": [
+        "literacy/writing/hold-pen:option",
+        "hygiene/teeth/why-brush:option"
+      ]
+    },
+    {
+      "id": "1b44c94f268c",
+      "text": "Cuta",
+      "sources": [
+        "hygiene/clothes/clean-clothes:option"
+      ]
+    },
+    {
+      "id": "831ea3a26630",
+      "text": "Da dare muna ganin wata da taurari.",
+      "sources": [
+        "literacy/story/moon:hint"
+      ]
+    },
+    {
+      "id": "56254fa66e05",
+      "text": "Da safe muna wanke … da ruwa.",
+      "sources": [
+        "hygiene/body/face:prompt"
+      ]
+    },
+    {
+      "id": "6b76bdff55bb",
+      "text": "Da'ira",
+      "sources": [
+        "numeracy/shapes/circle:word",
+        "numeracy/shapes/circle:option",
+        "numeracy/shapes/square:option",
+        "numeracy/shapes/triangle:option",
+        "numeracy/shapes/rectangle:option",
+        "numeracy/shapes/match-shapes:option",
+        "numeracy/shapes/shapes-around:option",
+        "numeracy/games/shape-hunt:option",
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "9678da0e05f8",
+      "text": "Dabbobi",
+      "sources": [
+        "literacy/grammar/people:option",
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "96835eb98d9f",
+      "text": "Dafa su",
+      "sources": [
+        "hygiene/food/wash-food:option"
+      ]
+    },
+    {
+      "id": "0a3944a77a84",
+      "text": "Dafawa",
+      "sources": [
+        "literacy/reading/sentences:option"
+      ]
+    },
+    {
+      "id": "7217a015df39",
+      "text": "Daidaita",
+      "sources": [
+        "numeracy/shapes/match-shapes:word",
+        "numeracy/games/number-match:word"
+      ]
+    },
+    {
+      "id": "07cefb183a1d",
+      "text": "Daidaita Lambobi",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "5d0a5c7b22df",
+      "text": "Daidaita Siffofi",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "d30c07fbfc8c",
+      "text": "Danna hotonka.",
+      "sources": [
+        "phrase:pickYourPhoto"
+      ]
+    },
+    {
+      "id": "8dd37cc545b1",
+      "text": "Danna hotunanka guda uku.",
+      "sources": [
+        "phrase:pickThreePictures"
+      ]
+    },
+    {
+      "id": "3993d7b679ac",
+      "text": "Dare",
+      "sources": [
+        "hygiene/teeth/brush-when:option"
+      ]
+    },
+    {
+      "id": "123d41be1a48",
+      "text": "Dogon murabba'i",
+      "sources": [
+        "numeracy/shapes/rectangle:word",
+        "numeracy/shapes/rectangle:option",
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "c930ab139203",
+      "text": "Duba kewaye da kai — siffofi suna ko'ina.",
+      "sources": [
+        "numeracy/shapes/shapes-around:hint"
+      ]
+    },
+    {
+      "id": "ea395c8bb7a7",
+      "text": "Duhu",
+      "sources": [
+        "hygiene/clothes/dry-clothes:option"
+      ]
+    },
+    {
+      "id": "fbe530fd30c8",
+      "text": "Ɗari",
+      "sources": [
+        "numeracy/games/count-race:option"
+      ]
+    },
+    {
+      "id": "ae062e6b0c7e",
+      "text": "ɗaya",
+      "sources": [
+        "number:1"
+      ]
+    },
+    {
+      "id": "9f7eede2fc1d",
+      "text": "ɗaya da bakwai",
+      "sources": [
+        "addition:1+7"
+      ]
+    },
+    {
+      "id": "041d4bbac64b",
+      "text": "ɗaya da biyar",
+      "sources": [
+        "addition:1+5"
+      ]
+    },
+    {
+      "id": "5a290fd3412e",
+      "text": "ɗaya da biyu",
+      "sources": [
+        "addition:1+2"
+      ]
+    },
+    {
+      "id": "63e29ba70b16",
+      "text": "ɗaya da ɗaya",
+      "sources": [
+        "addition:1+1"
+      ]
+    },
+    {
+      "id": "db54fa0728d2",
+      "text": "ɗaya da goma",
+      "sources": [
+        "addition:1+10"
+      ]
+    },
+    {
+      "id": "07ac3f4bad99",
+      "text": "ɗaya da huɗu",
+      "sources": [
+        "addition:1+4"
+      ]
+    },
+    {
+      "id": "dfc78495891b",
+      "text": "ɗaya da shida",
+      "sources": [
+        "addition:1+6"
+      ]
+    },
+    {
+      "id": "4e5df61aed05",
+      "text": "ɗaya da takwas",
+      "sources": [
+        "addition:1+8"
+      ]
+    },
+    {
+      "id": "1a43b9a2ce6c",
+      "text": "ɗaya da tara",
+      "sources": [
+        "addition:1+9"
+      ]
+    },
+    {
+      "id": "f7b4f246a401",
+      "text": "ɗaya da uku",
+      "sources": [
+        "addition:1+3"
+      ]
+    },
+    {
+      "id": "265f46311936",
+      "text": "Ɗaya, biyu, …, huɗu, biyar.",
+      "sources": [
+        "numeracy/counting/one-five:prompt"
+      ]
+    },
+    {
+      "id": "00cad579f476",
+      "text": "Fara daga goma, ka koma baya sau uku.",
+      "sources": [
+        "numeracy/subtraction/sub-ten:hint"
+      ]
+    },
+    {
+      "id": "c29bf36af111",
+      "text": "Fara daga sama zuwa ƙasa, kada ka gaggauta.",
+      "sources": [
+        "literacy/writing/trace-letters:hint"
+      ]
+    },
+    {
+      "id": "582478744b46",
+      "text": "Farce",
+      "sources": [
+        "hygiene/body/hair:option",
+        "hygiene/body/nails:word",
+        "hygiene/body/nails:option"
+      ]
+    },
+    {
+      "id": "55853bc510d8",
+      "text": "Fiye",
+      "sources": [
+        "numeracy/counting/more-less:word"
+      ]
+    },
+    {
+      "id": "e07887be016d",
+      "text": "Fiye da Ƙasa",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "c6c30113aacd",
+      "text": "Fuska",
+      "sources": [
+        "hygiene/body/face:word",
+        "hygiene/body/face:option"
+      ]
+    },
+    {
+      "id": "c24c05d805bf",
+      "text": "Fushi",
+      "sources": [
+        "literacy/story/farmer:option"
+      ]
+    },
+    {
+      "id": "108d1fb3bff7",
+      "text": "Ga apple huɗu. Nawa ne duka? ….",
+      "sources": [
+        "numeracy/counting/count-things:prompt"
+      ]
+    },
+    {
+      "id": "ebb78ccb92ab",
+      "text": "Gado",
+      "sources": [
+        "literacy/vocab/home:option",
+        "hygiene/body/face:option"
+      ]
+    },
+    {
+      "id": "44de7b755f32",
+      "text": "Gajiya",
+      "sources": [
+        "hygiene/body/healthy-body:option"
+      ]
+    },
+    {
+      "id": "25ba9c3f3189",
+      "text": "Ganyaye",
+      "sources": [
+        "hygiene/teeth/sugar:option",
+        "hygiene/food/vegetables:word",
+        "hygiene/food/vegetables:option",
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "ee8357ec66ba",
+      "text": "Ganyaye suna da ƙarfin gina jiki.",
+      "sources": [
+        "hygiene/food/vegetables:hint"
+      ]
+    },
+    {
+      "id": "0c05de48c149",
+      "text": "Gashi",
+      "sources": [
+        "hygiene/body/hair:word",
+        "hygiene/body/hair:option",
+        "hygiene/body/nails:option"
+      ]
+    },
+    {
+      "id": "da92064a4475",
+      "text": "Gashi mai tsafta ba ya ɗaukar ƙwarƙwata.",
+      "sources": [
+        "hygiene/body/hair:hint"
+      ]
+    },
+    {
+      "id": "8e9fe3343500",
+      "text": "Gefe biyu dogaye, gefe biyu gajeru.",
+      "sources": [
+        "numeracy/shapes/rectangle:hint"
+      ]
+    },
+    {
+      "id": "7d47d1e78cb1",
+      "text": "Gida",
+      "sources": [
+        "literacy/grammar/qa:option",
+        "literacy/story/goat:option"
+      ]
+    },
+    {
+      "id": "0029f565a1d6",
+      "text": "Gina Jimloli (1)",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "2fdaac2d304e",
+      "text": "Gina Jimloli (2)",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "3cc4542fd38b",
+      "text": "Gizo-gizo",
+      "sources": [
+        "literacy/story/spider:word",
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "69a575b048a3",
+      "text": "Gizo-gizo yana saƙa … don kama abinci.",
+      "sources": [
+        "literacy/story/spider:prompt"
+      ]
+    },
+    {
+      "id": "6bd7b183485a",
+      "text": "Goge a hankali, gaba da baya da sama-ƙasa.",
+      "sources": [
+        "hygiene/teeth/brush-how:hint"
+      ]
+    },
+    {
+      "id": "c19065ff5a04",
+      "text": "goma",
+      "sources": [
+        "number:10",
+        "numeracy/counting/one-five:option",
+        "numeracy/counting/more-less:option",
+        "numeracy/counting/twenty:option",
+        "numeracy/addition/add-ten:word",
+        "numeracy/addition/add-ten:option",
+        "numeracy/addition/add-fast:word",
+        "numeracy/addition/add-fast:option",
+        "numeracy/games/count-race:option",
+        "numeracy/games/memory:option"
+      ]
+    },
+    {
+      "id": "e5f09822fdc8",
+      "text": "goma da bakwai",
+      "sources": [
+        "addition:10+7"
+      ]
+    },
+    {
+      "id": "73e14fc084e5",
+      "text": "goma da biyar",
+      "sources": [
+        "addition:10+5"
+      ]
+    },
+    {
+      "id": "689b97d775dc",
+      "text": "goma da biyu",
+      "sources": [
+        "addition:10+2"
+      ]
+    },
+    {
+      "id": "43471a667518",
+      "text": "goma da ɗaya",
+      "sources": [
+        "addition:10+1"
+      ]
+    },
+    {
+      "id": "9182436e6524",
+      "text": "goma da goma",
+      "sources": [
+        "addition:10+10"
+      ]
+    },
+    {
+      "id": "927cec68fc1d",
+      "text": "Goma da goma su ne ….",
+      "sources": [
+        "numeracy/counting/twenty:prompt"
+      ]
+    },
+    {
+      "id": "aec9f43ea4b8",
+      "text": "goma da huɗu",
+      "sources": [
+        "addition:10+4"
+      ]
+    },
+    {
+      "id": "464d81f9f103",
+      "text": "goma da shida",
+      "sources": [
+        "addition:10+6"
+      ]
+    },
+    {
+      "id": "846b25dbfe1d",
+      "text": "goma da takwas",
+      "sources": [
+        "addition:10+8"
+      ]
+    },
+    {
+      "id": "22a39818293d",
+      "text": "goma da tara",
+      "sources": [
+        "addition:10+9"
+      ]
+    },
+    {
+      "id": "f1d18e0e5106",
+      "text": "goma da uku",
+      "sources": [
+        "addition:10+3"
+      ]
+    },
+    {
+      "id": "7fe3ee1f1a65",
+      "text": "goma sha bakwai",
+      "sources": [
+        "number:17"
+      ]
+    },
+    {
+      "id": "809a5367e129",
+      "text": "goma sha biyar",
+      "sources": [
+        "number:15",
+        "numeracy/addition/add-fast:option"
+      ]
+    },
+    {
+      "id": "ba14c77cd494",
+      "text": "goma sha biyu",
+      "sources": [
+        "number:12"
+      ]
+    },
+    {
+      "id": "e2e91aaef987",
+      "text": "goma sha ɗaya",
+      "sources": [
+        "number:11",
+        "numeracy/addition/add-ten:option"
+      ]
+    },
+    {
+      "id": "c871992a9a92",
+      "text": "goma sha huɗu",
+      "sources": [
+        "number:14"
+      ]
+    },
+    {
+      "id": "2868e9858452",
+      "text": "goma sha shida",
+      "sources": [
+        "number:16"
+      ]
+    },
+    {
+      "id": "52b6b54da61c",
+      "text": "goma sha takwas",
+      "sources": [
+        "number:18"
+      ]
+    },
+    {
+      "id": "03fae1c7b1a7",
+      "text": "goma sha tara",
+      "sources": [
+        "number:19"
+      ]
+    },
+    {
+      "id": "649bdeb84a4b",
+      "text": "goma sha uku",
+      "sources": [
+        "number:13",
+        "numeracy/subtraction/sub-ten:option",
+        "numeracy/subtraction/diff:option"
+      ]
+    },
+    {
+      "id": "e15d1356fd6c",
+      "text": "Gudu",
+      "sources": [
+        "literacy/grammar/actions:word",
+        "literacy/grammar/actions:option",
+        "literacy/grammar/sentence1:option",
+        "literacy/grammar/sentence2:option"
+      ]
+    },
+    {
+      "id": "b8f7d48af637",
+      "text": "Haɗa su duka sannan ka ƙidaya.",
+      "sources": [
+        "numeracy/addition/add-objects:hint"
+      ]
+    },
+    {
+      "id": "73ffed87db33",
+      "text": "Haɗin kai yana sauƙaƙa kowane aiki.",
+      "sources": [
+        "literacy/story/birds:hint"
+      ]
+    },
+    {
+      "id": "07d9ebf7bd98",
+      "text": "Hagu kaɗai",
+      "sources": [
+        "hygiene/teeth/brush-how:option"
+      ]
+    },
+    {
+      "id": "5cadaabfde1d",
+      "text": "Hakori",
+      "sources": [
+        "hygiene/body/hair:option"
+      ]
+    },
+    {
+      "id": "c56051a752bf",
+      "text": "Hakori mai tsafta yana ba mu … mai kyau.",
+      "sources": [
+        "hygiene/teeth/smile:prompt"
+      ]
+    },
+    {
+      "id": "9c5ce44ff083",
+      "text": "Hanci",
+      "sources": [
+        "literacy/vocab/body:option",
+        "hygiene/body/feet:option"
+      ]
+    },
+    {
+      "id": "0d4574d45541",
+      "text": "Hannu",
+      "sources": [
+        "literacy/vocab/body:word",
+        "literacy/vocab/body:option",
+        "hygiene/handwash/germs:option"
+      ]
+    },
+    {
+      "id": "6846ac812113",
+      "text": "Hannu jiƙaƙƙe yana ɗaukar ƙwayoyin cuta cikin sauƙi.",
+      "sources": [
+        "hygiene/handwash/dry:hint"
+      ]
+    },
+    {
+      "id": "e5b72c3f9ad2",
+      "text": "Hannu yana da yatsu biyar.",
+      "sources": [
+        "literacy/vocab/body:hint"
+      ]
+    },
+    {
+      "id": "374bc2a33028",
+      "text": "Harafi",
+      "sources": [
+        "literacy/writing/trace-letters:word",
+        "literacy/writing/trace-letters:option"
+      ]
+    },
+    {
+      "id": "5a9a3bfb7474",
+      "text": "Harafi na farko shi ne ….",
+      "sources": [
+        "literacy/reading/letters:prompt"
+      ]
+    },
+    {
+      "id": "0d42204e5baf",
+      "text": "Harafin B yana yin sautin ….",
+      "sources": [
+        "literacy/reading/sounds:prompt"
+      ]
+    },
+    {
+      "id": "d1937e99f7e7",
+      "text": "Haruffa",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "d784cacdccf1",
+      "text": "Haruffa sun haɗu su zama ….",
+      "sources": [
+        "literacy/writing/write-words:prompt"
+      ]
+    },
+    {
+      "id": "027c0ac16bd9",
+      "text": "Haruffa suna farawa da A, B, C.",
+      "sources": [
+        "literacy/reading/letters:hint"
+      ]
+    },
+    {
+      "id": "899e4ca499a8",
+      "text": "Haushi",
+      "sources": [
+        "literacy/reading/sentences:option"
+      ]
+    },
+    {
+      "id": "bf248756f8b1",
+      "text": "Hoto",
+      "sources": [
+        "literacy/writing/trace-letters:option",
+        "literacy/writing/write-sentence:option"
+      ]
+    },
+    {
+      "id": "d7eea06ddcbe",
+      "text": "huɗu",
+      "sources": [
+        "number:4",
+        "numeracy/counting/six-ten:option",
+        "numeracy/counting/count-things:word",
+        "numeracy/counting/count-things:option",
+        "numeracy/addition/add-1:option",
+        "numeracy/addition/add-small:option",
+        "numeracy/subtraction/sub-1:word",
+        "numeracy/subtraction/sub-1:option",
+        "numeracy/subtraction/take-away:word",
+        "numeracy/subtraction/take-away:option",
+        "numeracy/subtraction/sub-fast:option",
+        "numeracy/games/number-match:option",
+        "numeracy/games/add-game:option",
+        "numeracy/games/puzzle:option"
+      ]
+    },
+    {
+      "id": "8fff8be07cbc",
+      "text": "huɗu da bakwai",
+      "sources": [
+        "addition:4+7"
+      ]
+    },
+    {
+      "id": "4cf121c0db78",
+      "text": "huɗu da biyar",
+      "sources": [
+        "addition:4+5"
+      ]
+    },
+    {
+      "id": "85c4dd658aca",
+      "text": "huɗu da biyu",
+      "sources": [
+        "addition:4+2"
+      ]
+    },
+    {
+      "id": "50ff9f6f6ab9",
+      "text": "huɗu da ɗaya",
+      "sources": [
+        "addition:4+1"
+      ]
+    },
+    {
+      "id": "3ee5d47a73d4",
+      "text": "huɗu da goma",
+      "sources": [
+        "addition:4+10"
+      ]
+    },
+    {
+      "id": "e7d211e245bf",
+      "text": "huɗu da huɗu",
+      "sources": [
+        "addition:4+4"
+      ]
+    },
+    {
+      "id": "37834cc3fb2a",
+      "text": "huɗu da shida",
+      "sources": [
+        "addition:4+6"
+      ]
+    },
+    {
+      "id": "71fbc983c566",
+      "text": "huɗu da takwas",
+      "sources": [
+        "addition:4+8"
+      ]
+    },
+    {
+      "id": "2462097b77e5",
+      "text": "huɗu da tara",
+      "sources": [
+        "addition:4+9"
+      ]
+    },
+    {
+      "id": "47bec116e527",
+      "text": "huɗu da uku",
+      "sources": [
+        "addition:4+3"
+      ]
+    },
+    {
+      "id": "6b9ac4c59140",
+      "text": "Idan muka yi sauri da ƙafa, muna gudu.",
+      "sources": [
+        "literacy/grammar/actions:hint"
+      ]
+    },
+    {
+      "id": "9bf660e90dbb",
+      "text": "Ido",
+      "sources": [
+        "hygiene/handwash/germs:option"
+      ]
+    },
+    {
+      "id": "93b92f443d23",
+      "text": "Ina?",
+      "sources": [
+        "literacy/grammar/qa:word"
+      ]
+    },
+    {
+      "id": "79da8fdd63a7",
+      "text": "Iyali",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "84572ef2253e",
+      "text": "Ja",
+      "sources": [
+        "literacy/grammar/qa:option",
+        "literacy/writing/write-name:option",
+        "literacy/vocab/colors:word",
+        "literacy/vocab/colors:option"
+      ]
+    },
+    {
+      "id": "b40a61e013c9",
+      "text": "Ja, kore, rawaya — waɗannan launuka ne.",
+      "sources": [
+        "literacy/vocab/colors:hint"
+      ]
+    },
+    {
+      "id": "c28839da7ab3",
+      "text": "Jiki Mai Lafiya",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "6a5dcc593f71",
+      "text": "Jiki mai tsafta jiki ne mai lafiya.",
+      "sources": [
+        "hygiene/body/healthy-body:hint"
+      ]
+    },
+    {
+      "id": "c5a738bcb963",
+      "text": "Jiƙa, sabulu, goge, kurkura, bushe.",
+      "sources": [
+        "hygiene/handwash/steps:hint"
+      ]
+    },
+    {
+      "id": "b9e3492423eb",
+      "text": "Jimla",
+      "sources": [
+        "literacy/writing/write-sentence:word"
+      ]
+    },
+    {
+      "id": "1d2bce6be803",
+      "text": "Jimla mai kalmomi biyu: wanda ya yi, da abin da yake yi.",
+      "sources": [
+        "literacy/grammar/sentence1:hint"
+      ]
+    },
+    {
+      "id": "8f81a173755a",
+      "text": "Jimla tana ƙarewa da ….",
+      "sources": [
+        "literacy/writing/write-sentence:prompt"
+      ]
+    },
+    {
+      "id": "32d8a40dbb6d",
+      "text": "Jiya",
+      "sources": [
+        "literacy/grammar/sentence2:option"
+      ]
+    },
+    {
+      "id": "13fbd79c3d39",
+      "text": "K",
+      "sources": [
+        "literacy/reading/letters:option"
+      ]
+    },
+    {
+      "id": "dc02142ae706",
+      "text": "K-A-R-E ya zama kalmar “Kare”.",
+      "sources": [
+        "literacy/writing/write-words:hint"
+      ]
+    },
+    {
+      "id": "d312cc75dc28",
+      "text": "Ka",
+      "sources": [
+        "literacy/reading/syllables:word",
+        "literacy/reading/syllables:option"
+      ]
+    },
+    {
+      "id": "438f9f19869a",
+      "text": "Ka bi ɗigo-ɗigo don rubuta ….",
+      "sources": [
+        "literacy/writing/trace-letters:prompt"
+      ]
+    },
+    {
+      "id": "b38058e2a3ff",
+      "text": "Ka ga 2, 4, 6. Na gaba shi ne ….",
+      "sources": [
+        "numeracy/games/memory:prompt"
+      ]
+    },
+    {
+      "id": "1739df865841",
+      "text": "Ka kira malaminka.",
+      "sources": [
+        "phrase:callYourTeacher"
+      ]
+    },
+    {
+      "id": "fe2b5fef704b",
+      "text": "Ka sake gwadawa.",
+      "sources": [
+        "phrase:tryAgain"
+      ]
+    },
+    {
+      "id": "9fc83ea6e44b",
+      "text": "Ka saurari tambayar, sannan ka ƙara lambobin.",
+      "sources": [
+        "numeracy/addition/add-story:hint"
+      ]
+    },
+    {
+      "id": "19630e573fd0",
+      "text": "Ka shafa sabulu har sai ya yi ….",
+      "sources": [
+        "hygiene/handwash/soap:prompt"
+      ]
+    },
+    {
+      "id": "f7b23e90eab4",
+      "text": "Kada ka sa tufafi masu ƙazanta kwana biyu.",
+      "sources": [
+        "hygiene/clothes/change:hint"
+      ]
+    },
+    {
+      "id": "2da0443d5e9d",
+      "text": "Kaɗan ya isa — kamar girman wake.",
+      "sources": [
+        "hygiene/teeth/brush-tools:hint"
+      ]
+    },
+    {
+      "id": "6b9f67dd25b5",
+      "text": "Kafin ci",
+      "sources": [
+        "hygiene/handwash/when:word"
+      ]
+    },
+    {
+      "id": "f2411f1fb8d9",
+      "text": "Kafin cin 'ya'yan itace, muna ….",
+      "sources": [
+        "hygiene/food/wash-food:prompt"
+      ]
+    },
+    {
+      "id": "58840c2ebe35",
+      "text": "Kafin haruffa, muna koyon zana ….",
+      "sources": [
+        "literacy/writing/lines:prompt"
+      ]
+    },
+    {
+      "id": "0af43e2d309c",
+      "text": "Kalma",
+      "sources": [
+        "literacy/writing/write-words:word",
+        "literacy/writing/write-words:option"
+      ]
+    },
+    {
+      "id": "46aae82d9575",
+      "text": "Kalmomin Abu",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "52fa0dc246c1",
+      "text": "Kalmomin Aiki",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "63f1430070d5",
+      "text": "Kalmomin Mutane",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "9413b569e86f",
+      "text": "Kanmu",
+      "sources": [
+        "hygiene/clothes/neat:option"
+      ]
+    },
+    {
+      "id": "d8734c4e5eb3",
+      "text": "Karanta jimlar: Kare yana ….",
+      "sources": [
+        "literacy/reading/sentences:prompt"
+      ]
+    },
+    {
+      "id": "012a583310dc",
+      "text": "Karanta Jimloli",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "0e72294ab17c",
+      "text": "Karanta kalma bayan kalma, a hankali.",
+      "sources": [
+        "literacy/reading/sentences:hint"
+      ]
+    },
+    {
+      "id": "baeb37892446",
+      "text": "Karanta Kalmomi",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "419706088874",
+      "text": "Karanta Labari",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "82de268b7b92",
+      "text": "Karanta labarin sannan ka amsa daga cikinsa.",
+      "sources": [
+        "literacy/reading/story:hint"
+      ]
+    },
+    {
+      "id": "73962675390d",
+      "text": "Karanta: KI-FI. Wannan … ne.",
+      "sources": [
+        "literacy/reading/words:prompt"
+      ]
+    },
+    {
+      "id": "c442a7661b9c",
+      "text": "Karatu",
+      "sources": [
+        "literacy/reading/sentences:option"
+      ]
+    },
+    {
+      "id": "1a17cc4d0e22",
+      "text": "Kare",
+      "sources": [
+        "literacy/reading/words:option",
+        "literacy/vocab/animals:word",
+        "literacy/vocab/animals:option"
+      ]
+    },
+    {
+      "id": "64bbe206078d",
+      "text": "Kare yana ….",
+      "sources": [
+        "literacy/grammar/sentence1:prompt"
+      ]
+    },
+    {
+      "id": "3b7b96a70f55",
+      "text": "Kare yana gudu",
+      "sources": [
+        "literacy/grammar/sentence1:word"
+      ]
+    },
+    {
+      "id": "de9eaf9d9e11",
+      "text": "Kare yana haushi",
+      "sources": [
+        "literacy/reading/sentences:word"
+      ]
+    },
+    {
+      "id": "26f6532db4e3",
+      "text": "Kare yana tsare gida.",
+      "sources": [
+        "literacy/vocab/animals:hint"
+      ]
+    },
+    {
+      "id": "233f12523feb",
+      "text": "Kasancewa da Tsafta",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "371d6c30b4f7",
+      "text": "Kasancewa da tsafta yana nuna muna kula da ….",
+      "sources": [
+        "hygiene/clothes/neat:prompt"
+      ]
+    },
+    {
+      "id": "dcc65e1bf798",
+      "text": "Kasuwa",
+      "sources": [
+        "literacy/story/goat:option"
+      ]
+    },
+    {
+      "id": "495439499149",
+      "text": "Kauri",
+      "sources": [
+        "hygiene/handwash/soap:option"
+      ]
+    },
+    {
+      "id": "59c5dba56722",
+      "text": "Kaza",
+      "sources": [
+        "literacy/reading/words:option"
+      ]
+    },
+    {
+      "id": "21988a1eab91",
+      "text": "Kifi",
+      "sources": [
+        "literacy/reading/words:word",
+        "literacy/reading/words:option",
+        "literacy/vocab/animals:option"
+      ]
+    },
+    {
+      "id": "0e5c565ad372",
+      "text": "Kifi yana rayuwa cikin ruwa.",
+      "sources": [
+        "literacy/reading/words:hint"
+      ]
+    },
+    {
+      "id": "2ed45186c72f",
+      "text": "Kk",
+      "sources": [
+        "literacy/reading/syllables:option"
+      ]
+    },
+    {
+      "id": "beb8cf49a8e9",
+      "text": "Ko ƙarami yana iya taimakon babba.",
+      "sources": [
+        "literacy/story/lion:hint"
+      ]
+    },
+    {
+      "id": "9ba5081c344f",
+      "text": "Kore",
+      "sources": [
+        "literacy/vocab/colors:option"
+      ]
+    },
+    {
+      "id": "1bbbc73c8761",
+      "text": "Kowace lamba tana ƙaruwa da biyu.",
+      "sources": [
+        "numeracy/games/memory:hint"
+      ]
+    },
+    {
+      "id": "a1cba1a4c449",
+      "text": "Kowane harafi yana da sautinsa. B tana cewa “ba”.",
+      "sources": [
+        "literacy/reading/sounds:hint"
+      ]
+    },
+    {
+      "id": "7a4535fb0099",
+      "text": "Koyi lissafi",
+      "sources": [
+        "subject-title"
+      ]
+    },
+    {
+      "id": "6cfb7cc65d6f",
+      "text": "Koyi tsabta",
+      "sources": [
+        "subject-title"
+      ]
+    },
+    {
+      "id": "907cdc0bb9a5",
+      "text": "Koyo karatu da rubutu",
+      "sources": [
+        "subject-title"
+      ]
+    },
+    {
+      "id": "650d2a4f9090",
+      "text": "Kuɗi",
+      "sources": [
+        "hygiene/clothes/neat:option"
+      ]
+    },
+    {
+      "id": "8159bb457cdc",
+      "text": "Kujera",
+      "sources": [
+        "literacy/grammar/objects:word",
+        "literacy/grammar/objects:option",
+        "literacy/grammar/sentence1:option",
+        "literacy/story/spider:option"
+      ]
+    },
+    {
+      "id": "4a66ae953f62",
+      "text": "Kujera abu ne da muke zama a kansa.",
+      "sources": [
+        "literacy/grammar/objects:hint"
+      ]
+    },
+    {
+      "id": "f0aa195d5bd4",
+      "text": "Kula da hakori yana sa mu kwarin gwiwa.",
+      "sources": [
+        "hygiene/teeth/smile:hint"
+      ]
+    },
+    {
+      "id": "742725daba17",
+      "text": "Kullum ka wanke hannu kafin ka ci abinci.",
+      "sources": [
+        "hygiene/handwash/when:hint"
+      ]
+    },
+    {
+      "id": "ef5c48800298",
+      "text": "Kumfa",
+      "sources": [
+        "hygiene/handwash/soap:word",
+        "hygiene/handwash/soap:option"
+      ]
+    },
+    {
+      "id": "314f96b51db0",
+      "text": "Kumfa tana nuna sabulu ya isa hannu duka.",
+      "sources": [
+        "hygiene/handwash/soap:hint"
+      ]
+    },
+    {
+      "id": "b0f60f83f1bc",
+      "text": "Kunne",
+      "sources": [
+        "literacy/vocab/body:option",
+        "hygiene/handwash/germs:option",
+        "hygiene/body/feet:option"
+      ]
+    },
+    {
+      "id": "4e840bc877b0",
+      "text": "Kura",
+      "sources": [
+        "literacy/story/lion:option"
+      ]
+    },
+    {
+      "id": "97266a2191e8",
+      "text": "Kura ta bi akuya, sai akuya ta shiga ….",
+      "sources": [
+        "literacy/story/goat:prompt"
+      ]
+    },
+    {
+      "id": "607772e32b33",
+      "text": "Kurkura da ruwa",
+      "sources": [
+        "hygiene/handwash/steps:option"
+      ]
+    },
+    {
+      "id": "28cc16ccb580",
+      "text": "Ƙafa",
+      "sources": [
+        "hygiene/body/face:option",
+        "hygiene/body/feet:word",
+        "hygiene/body/feet:option"
+      ]
+    },
+    {
+      "id": "72f9cc578770",
+      "text": "Ƙanana ne sosai, amma suna kawo ciwo.",
+      "sources": [
+        "hygiene/handwash/germs:hint"
+      ]
+    },
+    {
+      "id": "58c0bb934d68",
+      "text": "Ƙara ɗaya yana nufin ka ci gaba da lamba ɗaya.",
+      "sources": [
+        "numeracy/addition/add-1:hint"
+      ]
+    },
+    {
+      "id": "1df567220a93",
+      "text": "Ƙara su. Nawa ne duka?",
+      "sources": [
+        "phrase:addThemUp"
+      ]
+    },
+    {
+      "id": "650d35b7acda",
+      "text": "Ƙaramin",
+      "sources": [
+        "literacy/writing/write-name:option"
+      ]
+    },
+    {
+      "id": "9eecc8c4d610",
+      "text": "Ƙarfi",
+      "sources": [
+        "hygiene/food/good-food:option"
+      ]
+    },
+    {
+      "id": "c724cb10fafc",
+      "text": "Ƙari da 1",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "1dc67b536b35",
+      "text": "Ƙari da Abubuwa",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "722e1c8297ab",
+      "text": "Ƙari da Sauri",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "fd2b44cba8bd",
+      "text": "Ƙari Ƙananan Lambobi",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "215972a05cd3",
+      "text": "Ƙari zuwa 10",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "99b566bf629d",
+      "text": "Ƙasa",
+      "sources": [
+        "hygiene/clothes/fold:option"
+      ]
+    },
+    {
+      "id": "ab1751dd85a1",
+      "text": "Ƙazanta",
+      "sources": [
+        "hygiene/clothes/change:option"
+      ]
+    },
+    {
+      "id": "4cae90968bc3",
+      "text": "Ƙazanta a tufafi tana ɗauke da ƙwayoyin cuta.",
+      "sources": [
+        "hygiene/clothes/clean-clothes:hint"
+      ]
+    },
+    {
+      "id": "5bc41fef43e1",
+      "text": "Ƙazanta tana ɓoyewa a ƙarƙashin farce.",
+      "sources": [
+        "hygiene/body/nails:hint"
+      ]
+    },
+    {
+      "id": "b1bf30424fe4",
+      "text": "Ƙidaya 1-5",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "9d67828b987f",
+      "text": "Ƙidaya 6-10",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "3a515842ac6f",
+      "text": "Ƙidaya a hankali daga ɗaya zuwa biyar.",
+      "sources": [
+        "numeracy/counting/one-five:hint"
+      ]
+    },
+    {
+      "id": "60634ecaae6a",
+      "text": "Ƙidaya Abubuwa",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "2f9cf796dc88",
+      "text": "Ƙidaya abubuwan sannan ka nemi lambar.",
+      "sources": [
+        "numeracy/games/number-match:hint"
+      ]
+    },
+    {
+      "id": "1df8d041a039",
+      "text": "Ƙidaya biyu bayan uku: huɗu, biyar.",
+      "sources": [
+        "numeracy/addition/add-small:hint"
+      ]
+    },
+    {
+      "id": "062babe9e721",
+      "text": "Ƙidaya kusurwoyi: ɗaya, biyu, uku.",
+      "sources": [
+        "numeracy/shapes/triangle:hint"
+      ]
+    },
+    {
+      "id": "1be218da65a9",
+      "text": "Ƙidaya mangwaro.",
+      "sources": [
+        "phrase:countTheMangoes"
+      ]
+    },
+    {
+      "id": "63cd118523ef",
+      "text": "Ƙidaya uku bayan biyu.",
+      "sources": [
+        "numeracy/games/add-game:hint"
+      ]
+    },
+    {
+      "id": "8817938b81ef",
+      "text": "Ƙidaya zuwa 20",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "7fc955648fef",
+      "text": "Ƙidaya: huɗu, biyar, shida.",
+      "sources": [
+        "numeracy/counting/order:hint"
+      ]
+    },
+    {
+      "id": "a785e6efde84",
+      "text": "Ƙofa",
+      "sources": [
+        "literacy/vocab/home:word",
+        "literacy/vocab/home:option"
+      ]
+    },
+    {
+      "id": "aa92b0d00f9c",
+      "text": "Ƙofa tana buɗewa da rufewa.",
+      "sources": [
+        "literacy/vocab/home:hint"
+      ]
+    },
+    {
+      "id": "ff9515240df1",
+      "text": "Ƙofa tana da siffar ….",
+      "sources": [
+        "numeracy/shapes/rectangle:prompt"
+      ]
+    },
+    {
+      "id": "d5c816caf3bd",
+      "text": "Ƙwallo",
+      "sources": [
+        "literacy/writing/trace-letters:option"
+      ]
+    },
+    {
+      "id": "c077b4cdf781",
+      "text": "Ƙwallo yana daidai da ….",
+      "sources": [
+        "numeracy/shapes/match-shapes:prompt"
+      ]
+    },
+    {
+      "id": "fb0f2ce11ed4",
+      "text": "Ƙwayoyin cuta",
+      "sources": [
+        "hygiene/handwash/germs:word"
+      ]
+    },
+    {
+      "id": "7d51ba4dce73",
+      "text": "Ƙwayoyin cuta ba a gani da ….",
+      "sources": [
+        "hygiene/handwash/germs:prompt"
+      ]
+    },
+    {
+      "id": "d3221d1f8324",
+      "text": "Labari",
+      "sources": [
+        "literacy/reading/story:word"
+      ]
+    },
+    {
+      "id": "62a662fd1470",
+      "text": "Lafiya",
+      "sources": [
+        "hygiene/body/healthy-body:word",
+        "hygiene/body/healthy-body:option"
+      ]
+    },
+    {
+      "id": "a7fd8b634fe6",
+      "text": "Lamba",
+      "sources": [
+        "literacy/writing/lines:option",
+        "literacy/writing/write-words:option",
+        "literacy/writing/write-sentence:option"
+      ]
+    },
+    {
+      "id": "73eef5e001de",
+      "text": "Lamba 4 tana daidai da abubuwa ….",
+      "sources": [
+        "numeracy/games/number-match:prompt"
+      ]
+    },
+    {
+      "id": "0ede1f6c0b6b",
+      "text": "Lamba mafi girma tana da abubuwa da yawa.",
+      "sources": [
+        "numeracy/counting/more-less:hint"
+      ]
+    },
+    {
+      "id": "6211a613ae73",
+      "text": "Lambobi biyu iri ɗaya suna da sauƙin haɗawa.",
+      "sources": [
+        "numeracy/addition/add-fast:hint"
+      ]
+    },
+    {
+      "id": "b46b10befcbd",
+      "text": "Launi",
+      "sources": [
+        "literacy/writing/write-words:option",
+        "hygiene/food/water:option"
+      ]
+    },
+    {
+      "id": "92b017c4c252",
+      "text": "Launin jini da tumatir shi ne ….",
+      "sources": [
+        "literacy/vocab/colors:prompt"
+      ]
+    },
+    {
+      "id": "1da10f912b88",
+      "text": "Launuka",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "96ffb1dfce33",
+      "text": "Layi",
+      "sources": [
+        "literacy/writing/lines:word",
+        "literacy/writing/lines:option",
+        "numeracy/shapes/shapes-around:option"
+      ]
+    },
+    {
+      "id": "ebd3dc325d8e",
+      "text": "Layi mikakke da layi mai kwana su ne farkon rubutu.",
+      "sources": [
+        "literacy/writing/lines:hint"
+      ]
+    },
+    {
+      "id": "7aeca6ba1d46",
+      "text": "Littattafai",
+      "sources": [
+        "literacy/grammar/people:option"
+      ]
+    },
+    {
+      "id": "b03a1379d57f",
+      "text": "Lokacin Goge Hakori",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "778d52742ebc",
+      "text": "Lokacin Wanke Hannu",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "6b0d31c0d563",
+      "text": "M",
+      "sources": [
+        "literacy/reading/letters:option"
+      ]
+    },
+    {
+      "id": "4aee4fa91933",
+      "text": "Madalla!",
+      "sources": [
+        "phrase:wellDone"
+      ]
+    },
+    {
+      "id": "ea4440bd9471",
+      "text": "Mai",
+      "sources": [
+        "hygiene/teeth/brush-tools:option",
+        "hygiene/body/bath:option",
+        "hygiene/clothes/wash-clothes:option"
+      ]
+    },
+    {
+      "id": "c4e0f4a1eacb",
+      "text": "Malami",
+      "sources": [
+        "literacy/reading/story:option",
+        "literacy/vocab/family:option"
+      ]
+    },
+    {
+      "id": "700c7c296c73",
+      "text": "Man goge baki",
+      "sources": [
+        "hygiene/teeth/brush-tools:word",
+        "hygiene/teeth/brush-tools:option"
+      ]
+    },
+    {
+      "id": "118f7db5399b",
+      "text": "Mangwaro da ayaba su ne ….",
+      "sources": [
+        "hygiene/food/fruits:prompt"
+      ]
+    },
+    {
+      "id": "11fa409dce1e",
+      "text": "Manomi",
+      "sources": [
+        "literacy/story/farmer:word"
+      ]
+    },
+    {
+      "id": "b94aecd324eb",
+      "text": "Manomi mai Hikima",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "924ca333dbdc",
+      "text": "Manomi mai hikima ya shuka iri, sai ya samu ….",
+      "sources": [
+        "literacy/story/farmer:prompt"
+      ]
+    },
+    {
+      "id": "989e96d8d99d",
+      "text": "Matakai",
+      "sources": [
+        "hygiene/handwash/steps:word"
+      ]
+    },
+    {
+      "id": "2d2741829141",
+      "text": "Matakan Wanke Hannu",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "b70b0b797eb6",
+      "text": "Me ya sa muke goge hakori",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "3ce809e94e5c",
+      "text": "Me ya sa muke wanke hannu",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "5dc5d66c2e71",
+      "text": "Muna canza tufafi idan sun yi ….",
+      "sources": [
+        "hygiene/clothes/change:prompt"
+      ]
+    },
+    {
+      "id": "db6183298b39",
+      "text": "Muna ci … da miya.",
+      "sources": [
+        "literacy/vocab/food:prompt"
+      ]
+    },
+    {
+      "id": "a7cb55b729d3",
+      "text": "Muna ci abinci iri-iri kowace ….",
+      "sources": [
+        "hygiene/food/healthy-eating:prompt"
+      ]
+    },
+    {
+      "id": "19a6f871dcc1",
+      "text": "Muna fara rubuta suna da … harafi.",
+      "sources": [
+        "literacy/writing/write-name:prompt"
+      ]
+    },
+    {
+      "id": "39a4555c5062",
+      "text": "Muna goge hakori da ….",
+      "sources": [
+        "hygiene/teeth/why-brush:prompt"
+      ]
+    },
+    {
+      "id": "f849d94eafa4",
+      "text": "Muna goge hakori da safe da kuma da ….",
+      "sources": [
+        "hygiene/teeth/brush-when:prompt"
+      ]
+    },
+    {
+      "id": "023015c46303",
+      "text": "Muna goge hakori daga ….",
+      "sources": [
+        "hygiene/teeth/brush-how:prompt"
+      ]
+    },
+    {
+      "id": "f1107303dadc",
+      "text": "Muna riƙe … da yatsu uku.",
+      "sources": [
+        "literacy/writing/hold-pen:prompt"
+      ]
+    },
+    {
+      "id": "33a520b1a69c",
+      "text": "Muna riƙe abu da ….",
+      "sources": [
+        "literacy/vocab/body:prompt"
+      ]
+    },
+    {
+      "id": "394107b458fd",
+      "text": "Muna sa … a cikin miya.",
+      "sources": [
+        "hygiene/food/vegetables:prompt"
+      ]
+    },
+    {
+      "id": "99dea1ea2eaa",
+      "text": "Muna sa … a kan buroshi.",
+      "sources": [
+        "hygiene/teeth/brush-tools:prompt"
+      ]
+    },
+    {
+      "id": "66121ad167e2",
+      "text": "Muna shan ruwa mai ….",
+      "sources": [
+        "hygiene/food/water:prompt"
+      ]
+    },
+    {
+      "id": "5999d0e331f4",
+      "text": "Muna shanya tufafi a cikin ….",
+      "sources": [
+        "hygiene/clothes/dry-clothes:prompt"
+      ]
+    },
+    {
+      "id": "d478737bd2db",
+      "text": "Muna shiga gida ta ….",
+      "sources": [
+        "literacy/vocab/home:prompt"
+      ]
+    },
+    {
+      "id": "2fe8d96aea8a",
+      "text": "Muna wanke da tsefe ….",
+      "sources": [
+        "hygiene/body/hair:prompt"
+      ]
+    },
+    {
+      "id": "860eb7d767d4",
+      "text": "Muna wanke hannu da ruwa da ….",
+      "sources": [
+        "hygiene/handwash/why:prompt"
+      ]
+    },
+    {
+      "id": "9a846171e9fb",
+      "text": "Muna wanke hannu kafin ….",
+      "sources": [
+        "hygiene/handwash/when:prompt"
+      ]
+    },
+    {
+      "id": "6140d4546ab4",
+      "text": "Muna wanke tufafi da ruwa da ….",
+      "sources": [
+        "hygiene/clothes/wash-clothes:prompt"
+      ]
+    },
+    {
+      "id": "d4e24b63384f",
+      "text": "Muna yanke … don ƙazanta kada ta taru.",
+      "sources": [
+        "hygiene/body/nails:prompt"
+      ]
+    },
+    {
+      "id": "c0d49157a950",
+      "text": "Muna yin wanka da ruwa da ….",
+      "sources": [
+        "hygiene/body/bath:prompt"
+      ]
+    },
+    {
+      "id": "77d98b9d8b11",
+      "text": "Muna zama a kan ….",
+      "sources": [
+        "literacy/grammar/objects:prompt"
+      ]
+    },
+    {
+      "id": "f6c609f09445",
+      "text": "Murabba'i",
+      "sources": [
+        "numeracy/shapes/circle:option",
+        "numeracy/shapes/square:word",
+        "numeracy/shapes/square:option",
+        "numeracy/shapes/triangle:option",
+        "numeracy/shapes/match-shapes:option",
+        "numeracy/games/shape-hunt:option",
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "742903eef5cf",
+      "text": "Murabba'i yana da gefe huɗu masu tsayi ɗaya.",
+      "sources": [
+        "numeracy/shapes/square:hint"
+      ]
+    },
+    {
+      "id": "12151e4f29b0",
+      "text": "Murmushi",
+      "sources": [
+        "hygiene/teeth/smile:word",
+        "hygiene/teeth/smile:option"
+      ]
+    },
+    {
+      "id": "2c325685bfd9",
+      "text": "Murmushi Mai Ƙoshin Lafiya",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "741ea13e1793",
+      "text": "Musa yana da mangwaro uku, uwa ta ba shi biyu. Yanzu yana da ….",
+      "sources": [
+        "numeracy/addition/add-story:prompt"
+      ]
+    },
+    {
+      "id": "1003c40c4357",
+      "text": "Naɗe Tufafi",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "f8b8c19c4243",
+      "text": "Naɗewa",
+      "sources": [
+        "hygiene/clothes/fold:word"
+      ]
+    },
+    {
+      "id": "6c1fec6e0dda",
+      "text": "Nama",
+      "sources": [
+        "hygiene/food/fruits:option"
+      ]
+    },
+    {
+      "id": "1029eb96b02b",
+      "text": "Neman siffa",
+      "sources": [
+        "numeracy/games/shape-hunt:word"
+      ]
+    },
+    {
+      "id": "6d62a7ef53f5",
+      "text": "Neman Siffofi",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "e131cb5de8ab",
+      "text": "Nemo siffar da ta yi kama da abin.",
+      "sources": [
+        "numeracy/shapes/match-shapes:hint"
+      ]
+    },
+    {
+      "id": "84cf28c66027",
+      "text": "Nemo siffofin da ke kewaye da kai.",
+      "sources": [
+        "numeracy/games/shape-hunt:hint"
+      ]
+    },
+    {
+      "id": "c45633fa0ebb",
+      "text": "Ragi da 1",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "646e756893b0",
+      "text": "Ragi da Sauri",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "766de54e5f8d",
+      "text": "Ragi daga 10",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "80c0ff172a69",
+      "text": "Rana",
+      "sources": [
+        "literacy/story/moon:option",
+        "hygiene/clothes/dry-clothes:option",
+        "hygiene/food/healthy-eating:option"
+      ]
+    },
+    {
+      "id": "e104ba2406da",
+      "text": "Rana da ƙwallo suna da siffar da'ira.",
+      "sources": [
+        "numeracy/shapes/circle:hint"
+      ]
+    },
+    {
+      "id": "ffaefa8d2e7b",
+      "text": "Rana kawai",
+      "sources": [
+        "hygiene/teeth/brush-when:option"
+      ]
+    },
+    {
+      "id": "8d4414e5064f",
+      "text": "Rana tana bushe tufafi tana kuma kashe ƙwayoyin cuta.",
+      "sources": [
+        "hygiene/clothes/dry-clothes:hint"
+      ]
+    },
+    {
+      "id": "7291eb3db6cd",
+      "text": "Riƙe Alƙalami",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "ef8a444fcd9c",
+      "text": "Rubuta Jimla",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "58608cdb62f3",
+      "text": "Rubuta Kalmomi",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "549a0360cda1",
+      "text": "Rubuta Sunanka",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "5e82401035e3",
+      "text": "Ruwa",
+      "sources": [
+        "literacy/grammar/objects:option",
+        "literacy/story/goat:option",
+        "literacy/story/moon:option",
+        "hygiene/teeth/sugar:option",
+        "hygiene/clothes/clean-clothes:option",
+        "hygiene/clothes/dry-clothes:option",
+        "hygiene/food/water:word"
+      ]
+    },
+    {
+      "id": "86dbe75be93d",
+      "text": "Ruwa mai ƙazanta yana kawo ciwon ciki.",
+      "sources": [
+        "hygiene/food/water:hint"
+      ]
+    },
+    {
+      "id": "3608a6d1a05a",
+      "text": "Sa",
+      "sources": [
+        "literacy/reading/sounds:option"
+      ]
+    },
+    {
+      "id": "60ae8bdd11cf",
+      "text": "Sa takalmi kuma yana kare ƙafa.",
+      "sources": [
+        "hygiene/body/feet:hint"
+      ]
+    },
+    {
+      "id": "95803fca5d7c",
+      "text": "Sabo",
+      "sources": [
+        "hygiene/clothes/change:option"
+      ]
+    },
+    {
+      "id": "c6037a23315f",
+      "text": "Sabulu",
+      "sources": [
+        "literacy/writing/hold-pen:option",
+        "literacy/vocab/food:option",
+        "hygiene/handwash/why:word",
+        "hygiene/handwash/why:option",
+        "hygiene/teeth/brush-tools:option",
+        "hygiene/body/bath:option",
+        "hygiene/clothes/wash-clothes:option"
+      ]
+    },
+    {
+      "id": "57b9585d2e43",
+      "text": "Sabulu yana cire ƙazanta daga zare.",
+      "sources": [
+        "hygiene/clothes/wash-clothes:hint"
+      ]
+    },
+    {
+      "id": "c11f04a8e18d",
+      "text": "Sabulu yana kashe ƙwayoyin cuta.",
+      "sources": [
+        "hygiene/handwash/why:hint"
+      ]
+    },
+    {
+      "id": "51abdf03ce52",
+      "text": "Safe da dare",
+      "sources": [
+        "hygiene/teeth/brush-when:word"
+      ]
+    },
+    {
+      "id": "c65d0186044f",
+      "text": "Sama da ƙasa",
+      "sources": [
+        "hygiene/teeth/brush-how:word"
+      ]
+    },
+    {
+      "id": "ce985c1ba6e9",
+      "text": "Sama zuwa ƙasa",
+      "sources": [
+        "hygiene/teeth/brush-how:option"
+      ]
+    },
+    {
+      "id": "f3707ec09973",
+      "text": "Sannu! Danna don farawa.",
+      "sources": [
+        "phrase:welcome"
+      ]
+    },
+    {
+      "id": "e3f61b9523f5",
+      "text": "Sannu! Zaɓi abin da za ka koya.",
+      "sources": [
+        "phrase:chooseWhatToLearn"
+      ]
+    },
+    {
+      "id": "ebb5a526cd20",
+      "text": "Sannu.",
+      "sources": [
+        "phrase:hello"
+      ]
+    },
+    {
+      "id": "64df7cbab432",
+      "text": "Sanyi",
+      "sources": [
+        "hygiene/handwash/soap:option"
+      ]
+    },
+    {
+      "id": "1f1a88761910",
+      "text": "Sassan Jiki",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "4ec3ccb794ef",
+      "text": "Sati",
+      "sources": [
+        "hygiene/teeth/brush-when:option"
+      ]
+    },
+    {
+      "id": "783f547f353b",
+      "text": "Sau biyu a rana: bayan farkawa, kafin barci.",
+      "sources": [
+        "hygiene/teeth/brush-when:hint"
+      ]
+    },
+    {
+      "id": "bb747fb73924",
+      "text": "Sau ɗaya kawai",
+      "sources": [
+        "hygiene/teeth/brush-how:option"
+      ]
+    },
+    {
+      "id": "b64fef7a6a2e",
+      "text": "Saurari kalmar, sannan ka zaɓi amsar da ta dace.",
+      "sources": [
+        "phrase:listenAndChoose"
+      ]
+    },
+    {
+      "id": "18d8bf26fa50",
+      "text": "Sautuka",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "c8379a6e8d28",
+      "text": "Siffa mai gefe huɗu daidai wa daida ita ce ….",
+      "sources": [
+        "numeracy/shapes/square:prompt"
+      ]
+    },
+    {
+      "id": "2c3609403e22",
+      "text": "Siffa mai kusurwa uku ita ce ….",
+      "sources": [
+        "numeracy/shapes/triangle:prompt"
+      ]
+    },
+    {
+      "id": "4a37c280cb25",
+      "text": "Siffa mai zagaye ba tare da kusurwa ba ita ce ….",
+      "sources": [
+        "numeracy/shapes/circle:prompt"
+      ]
+    },
+    {
+      "id": "7b51ce686812",
+      "text": "Siffofi Kewaye da Mu",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "4f709feff406",
+      "text": "sifili",
+      "sources": [
+        "number:0"
+      ]
+    },
+    {
+      "id": "f5fe1f0932f8",
+      "text": "Sukari",
+      "sources": [
+        "hygiene/food/vegetables:option"
+      ]
+    },
+    {
+      "id": "4ae85de5a058",
+      "text": "Sukari da Hakori",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "a9d4cae372f7",
+      "text": "Sukari yana ba ƙwayoyin cuta abinci a bakinmu.",
+      "sources": [
+        "hygiene/teeth/sugar:hint"
+      ]
+    },
+    {
+      "id": "1fb393c3f3f6",
+      "text": "Suna",
+      "sources": [
+        "literacy/writing/write-name:word"
+      ]
+    },
+    {
+      "id": "5453b26abd55",
+      "text": "Sunan mutum yana farawa da babban harafi.",
+      "sources": [
+        "literacy/writing/write-name:hint"
+      ]
+    },
+    {
+      "id": "83a8efeebcaf",
+      "text": "Shan Ruwa",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "8d2036565716",
+      "text": "Shanya Tufafi",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "a2e72f4882be",
+      "text": "Shanyawa",
+      "sources": [
+        "hygiene/clothes/dry-clothes:word"
+      ]
+    },
+    {
+      "id": "5e8c606ddbba",
+      "text": "Shekara",
+      "sources": [
+        "hygiene/food/healthy-eating:option"
+      ]
+    },
+    {
+      "id": "1b311f50eb80",
+      "text": "shida",
+      "sources": [
+        "number:6",
+        "numeracy/counting/six-ten:option",
+        "numeracy/addition/add-small:option",
+        "numeracy/addition/add-objects:option",
+        "numeracy/addition/add-story:option",
+        "numeracy/subtraction/sub-1:option",
+        "numeracy/subtraction/sub-ten:option",
+        "numeracy/subtraction/sub-fast:option",
+        "numeracy/games/add-game:option",
+        "numeracy/games/puzzle:option"
+      ]
+    },
+    {
+      "id": "eb02597cb339",
+      "text": "shida da bakwai",
+      "sources": [
+        "addition:6+7"
+      ]
+    },
+    {
+      "id": "078cfb86da50",
+      "text": "shida da biyar",
+      "sources": [
+        "addition:6+5"
+      ]
+    },
+    {
+      "id": "44e07adb746d",
+      "text": "shida da biyu",
+      "sources": [
+        "addition:6+2"
+      ]
+    },
+    {
+      "id": "4c51bb88ca55",
+      "text": "shida da ɗaya",
+      "sources": [
+        "addition:6+1"
+      ]
+    },
+    {
+      "id": "ce253e950ce7",
+      "text": "shida da goma",
+      "sources": [
+        "addition:6+10"
+      ]
+    },
+    {
+      "id": "e6cd945458d0",
+      "text": "shida da huɗu",
+      "sources": [
+        "addition:6+4"
+      ]
+    },
+    {
+      "id": "3eacc88a2d8f",
+      "text": "shida da shida",
+      "sources": [
+        "addition:6+6"
+      ]
+    },
+    {
+      "id": "9aa09371922f",
+      "text": "shida da takwas",
+      "sources": [
+        "addition:6+8"
+      ]
+    },
+    {
+      "id": "98ae9613725a",
+      "text": "shida da tara",
+      "sources": [
+        "addition:6+9"
+      ]
+    },
+    {
+      "id": "51486cc4d487",
+      "text": "shida da uku",
+      "sources": [
+        "addition:6+3"
+      ]
+    },
+    {
+      "id": "da575a8f883d",
+      "text": "Shida, bakwai, …, tara, goma.",
+      "sources": [
+        "numeracy/counting/six-ten:prompt"
+      ]
+    },
+    {
+      "id": "8cfa2d2fd355",
+      "text": "Shinkafa",
+      "sources": [
+        "literacy/vocab/food:word",
+        "literacy/vocab/food:option"
+      ]
+    },
+    {
+      "id": "4284c1001e04",
+      "text": "Shinkafa abinci ne da ake dafawa.",
+      "sources": [
+        "literacy/vocab/food:hint"
+      ]
+    },
+    {
+      "id": "00a6ba21da70",
+      "text": "Ta",
+      "sources": [
+        "literacy/reading/sounds:option"
+      ]
+    },
+    {
+      "id": "3385117e215d",
+      "text": "Taɓa kowane abu sau ɗaya yayin ƙidaya.",
+      "sources": [
+        "numeracy/counting/count-things:hint"
+      ]
+    },
+    {
+      "id": "13b0065fea0d",
+      "text": "takwas",
+      "sources": [
+        "number:8",
+        "numeracy/counting/six-ten:word",
+        "numeracy/counting/six-ten:option",
+        "numeracy/counting/order:option",
+        "numeracy/addition/add-objects:option",
+        "numeracy/subtraction/take-away:option",
+        "numeracy/games/memory:option"
+      ]
+    },
+    {
+      "id": "41909d7f6ed5",
+      "text": "takwas da bakwai",
+      "sources": [
+        "addition:8+7"
+      ]
+    },
+    {
+      "id": "4a0e7d26e32c",
+      "text": "takwas da biyar",
+      "sources": [
+        "addition:8+5"
+      ]
+    },
+    {
+      "id": "e4b1e6c4fbd9",
+      "text": "takwas da biyu",
+      "sources": [
+        "addition:8+2"
+      ]
+    },
+    {
+      "id": "8b226595fdea",
+      "text": "takwas da ɗaya",
+      "sources": [
+        "addition:8+1"
+      ]
+    },
+    {
+      "id": "59b563f665fd",
+      "text": "takwas da goma",
+      "sources": [
+        "addition:8+10"
+      ]
+    },
+    {
+      "id": "eba7b1a39f2c",
+      "text": "takwas da huɗu",
+      "sources": [
+        "addition:8+4"
+      ]
+    },
+    {
+      "id": "57d60395144a",
+      "text": "takwas da shida",
+      "sources": [
+        "addition:8+6"
+      ]
+    },
+    {
+      "id": "4115381d7632",
+      "text": "takwas da takwas",
+      "sources": [
+        "addition:8+8"
+      ]
+    },
+    {
+      "id": "f0cf42a8486f",
+      "text": "takwas da tara",
+      "sources": [
+        "addition:8+9"
+      ]
+    },
+    {
+      "id": "e60d972ee1a2",
+      "text": "takwas da uku",
+      "sources": [
+        "addition:8+3"
+      ]
+    },
+    {
+      "id": "4226d0084080",
+      "text": "Talatin",
+      "sources": [
+        "numeracy/counting/twenty:option"
+      ]
+    },
+    {
+      "id": "92f6c94415a2",
+      "text": "Tambaya tana farawa da “Ina”. Amsa tana faɗin wurin.",
+      "sources": [
+        "literacy/grammar/qa:hint"
+      ]
+    },
+    {
+      "id": "98798248ef70",
+      "text": "Tambaya: “Ina uwa?” Amsa: “Uwa tana ….”",
+      "sources": [
+        "literacy/grammar/qa:prompt"
+      ]
+    },
+    {
+      "id": "803f5119d1bb",
+      "text": "Tambayoyi da Amsa",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "2f64616f89a7",
+      "text": "Tambayoyin Ƙari",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "4a894e10015a",
+      "text": "Tambayoyin Ragi",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "54a8445e4253",
+      "text": "tara",
+      "sources": [
+        "number:9",
+        "numeracy/counting/more-less:option",
+        "numeracy/addition/add-ten:option"
+      ]
+    },
+    {
+      "id": "d20bf92eedb4",
+      "text": "tara da bakwai",
+      "sources": [
+        "addition:9+7"
+      ]
+    },
+    {
+      "id": "acffc9019959",
+      "text": "tara da biyar",
+      "sources": [
+        "addition:9+5"
+      ]
+    },
+    {
+      "id": "970b8715cf1e",
+      "text": "tara da biyu",
+      "sources": [
+        "addition:9+2"
+      ]
+    },
+    {
+      "id": "a70fa683eba8",
+      "text": "tara da ɗaya",
+      "sources": [
+        "addition:9+1"
+      ]
+    },
+    {
+      "id": "cb8fb8d5511b",
+      "text": "tara da goma",
+      "sources": [
+        "addition:9+10"
+      ]
+    },
+    {
+      "id": "79c4e55ab018",
+      "text": "tara da huɗu",
+      "sources": [
+        "addition:9+4"
+      ]
+    },
+    {
+      "id": "cad6e44732da",
+      "text": "tara da shida",
+      "sources": [
+        "addition:9+6"
+      ]
+    },
+    {
+      "id": "8c1dda13f8d2",
+      "text": "tara da takwas",
+      "sources": [
+        "addition:9+8"
+      ]
+    },
+    {
+      "id": "8744b75ade56",
+      "text": "tara da tara",
+      "sources": [
+        "addition:9+9"
+      ]
+    },
+    {
+      "id": "9ced125ba115",
+      "text": "tara da uku",
+      "sources": [
+        "addition:9+3"
+      ]
+    },
+    {
+      "id": "08f89e1dd37e",
+      "text": "Tawul",
+      "sources": [
+        "hygiene/handwash/dry:word"
+      ]
+    },
+    {
+      "id": "196086d294ca",
+      "text": "Tawul mai tsafta",
+      "sources": [
+        "hygiene/handwash/dry:option"
+      ]
+    },
+    {
+      "id": "621914111ce7",
+      "text": "Tebur",
+      "sources": [
+        "literacy/vocab/home:option"
+      ]
+    },
+    {
+      "id": "d00a9b2133a3",
+      "text": "Toka",
+      "sources": [
+        "hygiene/handwash/why:option"
+      ]
+    },
+    {
+      "id": "32936d03924f",
+      "text": "Tufafi",
+      "sources": [
+        "literacy/vocab/food:option",
+        "literacy/story/spider:option",
+        "hygiene/body/nails:option",
+        "hygiene/clothes/clean-clothes:word"
+      ]
+    },
+    {
+      "id": "dc9ad02682fc",
+      "text": "Tufafi da aka naɗe ba sa ɗaukar ƙura.",
+      "sources": [
+        "hygiene/clothes/fold:hint"
+      ]
+    },
+    {
+      "id": "37381500e25a",
+      "text": "Tufafi masu ƙazanta",
+      "sources": [
+        "hygiene/handwash/dry:option"
+      ]
+    },
+    {
+      "id": "7d49e38bf4fc",
+      "text": "Tufafi Masu Tsabta",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "6526f925b471",
+      "text": "Tufafi masu tsafta suna kare mu daga ….",
+      "sources": [
+        "hygiene/clothes/clean-clothes:prompt"
+      ]
+    },
+    {
+      "id": "57bb00cc69ed",
+      "text": "Tunawa",
+      "sources": [
+        "numeracy/games/memory:word"
+      ]
+    },
+    {
+      "id": "af9fa03c71ed",
+      "text": "Tsabtar Gashi",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "77781914aa83",
+      "text": "Tsabtar Ƙafa",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "4e0634f2000c",
+      "text": "Tsafta",
+      "sources": [
+        "hygiene/clothes/change:option",
+        "hygiene/clothes/neat:word",
+        "hygiene/food/water:option"
+      ]
+    },
+    {
+      "id": "3dd527c4905e",
+      "text": "Tsafta al'ada ce ta yau da kullum.",
+      "sources": [
+        "hygiene/clothes/neat:hint"
+      ]
+    },
+    {
+      "id": "968135a71295",
+      "text": "Tsafta da abinci mai kyau suna ba mu ….",
+      "sources": [
+        "hygiene/body/healthy-body:prompt"
+      ]
+    },
+    {
+      "id": "9928a0fc5731",
+      "text": "Tsari",
+      "sources": [
+        "numeracy/counting/order:word"
+      ]
+    },
+    {
+      "id": "10954c5705a6",
+      "text": "Tsari na Lambobi",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "2458bb6b7461",
+      "text": "Tsere",
+      "sources": [
+        "numeracy/games/count-race:word"
+      ]
+    },
+    {
+      "id": "a5c5e96f98c5",
+      "text": "Tseren Ƙidaya",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "9770b6f212a5",
+      "text": "Tsuntsaye",
+      "sources": [
+        "literacy/story/birds:word"
+      ]
+    },
+    {
+      "id": "5c723449b2d6",
+      "text": "Tsuntsaye Biyu",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "c09e0c316271",
+      "text": "Tsuntsaye biyu sun taimaki juna, don haka sun ….",
+      "sources": [
+        "literacy/story/birds:prompt"
+      ]
+    },
+    {
+      "id": "732ac3a5e615",
+      "text": "Tsuntsu",
+      "sources": [
+        "literacy/vocab/animals:option"
+      ]
+    },
+    {
+      "id": "897aae694ae5",
+      "text": "uku",
+      "sources": [
+        "number:3",
+        "literacy/grammar/qa:option",
+        "numeracy/counting/one-five:word",
+        "numeracy/counting/one-five:option",
+        "numeracy/addition/add-1:word",
+        "numeracy/addition/add-1:option",
+        "numeracy/addition/add-story:option",
+        "numeracy/subtraction/take-away:option",
+        "numeracy/subtraction/sub-story:word",
+        "numeracy/subtraction/sub-story:option",
+        "numeracy/subtraction/diff:option",
+        "numeracy/games/count-race:option"
+      ]
+    },
+    {
+      "id": "c181a153f3dd",
+      "text": "uku da bakwai",
+      "sources": [
+        "addition:3+7"
+      ]
+    },
+    {
+      "id": "799d0038a961",
+      "text": "uku da biyar",
+      "sources": [
+        "addition:3+5"
+      ]
+    },
+    {
+      "id": "e0ecdf5f1499",
+      "text": "uku da biyu",
+      "sources": [
+        "addition:3+2"
+      ]
+    },
+    {
+      "id": "3deef473b422",
+      "text": "uku da ɗaya",
+      "sources": [
+        "addition:3+1"
+      ]
+    },
+    {
+      "id": "fb734b23f034",
+      "text": "uku da goma",
+      "sources": [
+        "addition:3+10"
+      ]
+    },
+    {
+      "id": "77806a15550b",
+      "text": "uku da huɗu",
+      "sources": [
+        "addition:3+4"
+      ]
+    },
+    {
+      "id": "04899366ef51",
+      "text": "uku da shida",
+      "sources": [
+        "addition:3+6"
+      ]
+    },
+    {
+      "id": "31329e1c201b",
+      "text": "uku da takwas",
+      "sources": [
+        "addition:3+8"
+      ]
+    },
+    {
+      "id": "aa6d8b5bfbf4",
+      "text": "uku da tara",
+      "sources": [
+        "addition:3+9"
+      ]
+    },
+    {
+      "id": "e8dc13be6f7b",
+      "text": "uku da uku",
+      "sources": [
+        "addition:3+3"
+      ]
+    },
+    {
+      "id": "4da96a5a3948",
+      "text": "Uwa",
+      "sources": [
+        "literacy/grammar/sentence1:option",
+        "literacy/vocab/family:word",
+        "literacy/vocab/family:option"
+      ]
+    },
+    {
+      "id": "7f0c52e15db8",
+      "text": "Uwa da uba su ne iyaye.",
+      "sources": [
+        "literacy/vocab/family:hint"
+      ]
+    },
+    {
+      "id": "62cfa9d342a1",
+      "text": "Uwa tana dafa ….",
+      "sources": [
+        "literacy/grammar/sentence2:prompt"
+      ]
+    },
+    {
+      "id": "30002b866b45",
+      "text": "Uwa tana dafa abinci",
+      "sources": [
+        "literacy/grammar/sentence2:word"
+      ]
+    },
+    {
+      "id": "d162a54c0445",
+      "text": "Wacce take kula da mu a gida? ….",
+      "sources": [
+        "literacy/vocab/family:prompt"
+      ]
+    },
+    {
+      "id": "22d41d68ee6c",
+      "text": "Wace lamba ta ɓace a tsakiya?",
+      "sources": [
+        "numeracy/games/puzzle:hint"
+      ]
+    },
+    {
+      "id": "eae046800146",
+      "text": "Waɗannan su ne ….",
+      "sources": [
+        "literacy/grammar/people:prompt"
+      ]
+    },
+    {
+      "id": "29c75f06718f",
+      "text": "Waje",
+      "sources": [
+        "hygiene/clothes/fold:option"
+      ]
+    },
+    {
+      "id": "247ec56de37d",
+      "text": "Waƙa",
+      "sources": [
+        "literacy/writing/lines:option"
+      ]
+    },
+    {
+      "id": "13b6baf2c7e7",
+      "text": "Wanda ya fita ana cire shi.",
+      "sources": [
+        "numeracy/subtraction/sub-story:hint"
+      ]
+    },
+    {
+      "id": "d2842ef62f6b",
+      "text": "Wanda ya yi haƙuri da aiki yana samun sakamako.",
+      "sources": [
+        "literacy/story/farmer:hint"
+      ]
+    },
+    {
+      "id": "9c78c254aa80",
+      "text": "Wanka",
+      "sources": [
+        "hygiene/body/bath:word"
+      ]
+    },
+    {
+      "id": "d566a588a6fa",
+      "text": "Wanke",
+      "sources": [
+        "hygiene/clothes/wash-clothes:word"
+      ]
+    },
+    {
+      "id": "7592e9b9c18f",
+      "text": "Wanke abinci",
+      "sources": [
+        "hygiene/food/wash-food:word",
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "987f3e78c1fb",
+      "text": "Wanke da ruwa mai tsafta yana cire ƙura da cuta.",
+      "sources": [
+        "hygiene/food/wash-food:hint"
+      ]
+    },
+    {
+      "id": "d6064fb1d386",
+      "text": "Wanke Fuska",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "0c0b9ad37d1b",
+      "text": "Wanke fuska yana kare ido daga cuta.",
+      "sources": [
+        "hygiene/body/face:hint"
+      ]
+    },
+    {
+      "id": "2ef89ac93469",
+      "text": "Wanke su",
+      "sources": [
+        "hygiene/food/wash-food:option"
+      ]
+    },
+    {
+      "id": "cf4073c50f35",
+      "text": "Wanke Tufafi",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "7b0ca335b05e",
+      "text": "Wanne dabba ce take yin haushi? ….",
+      "sources": [
+        "literacy/vocab/animals:prompt"
+      ]
+    },
+    {
+      "id": "79739fb31e1d",
+      "text": "Wanne rukuni yake da wannan lamba?",
+      "sources": [
+        "phrase:whichGroupHas"
+      ]
+    },
+    {
+      "id": "8958d61671cf",
+      "text": "Wanne ya zo kafin shida? ….",
+      "sources": [
+        "numeracy/counting/order:prompt"
+      ]
+    },
+    {
+      "id": "4c725e1c14ec",
+      "text": "Wasa",
+      "sources": [
+        "hygiene/handwash/when:option",
+        "hygiene/clothes/neat:option"
+      ]
+    },
+    {
+      "id": "352015be5d5a",
+      "text": "Wasan ƙari",
+      "sources": [
+        "numeracy/games/add-game:word",
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "0ca4e2188178",
+      "text": "Wasan lamba",
+      "sources": [
+        "numeracy/games/puzzle:word"
+      ]
+    },
+    {
+      "id": "04d7eb2b58bd",
+      "text": "Wasan Tunawa",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "d04c5c60a8ab",
+      "text": "Wasan Wasa",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "289fddc94bd0",
+      "text": "Wata",
+      "sources": [
+        "literacy/story/moon:word",
+        "literacy/story/moon:option",
+        "hygiene/food/healthy-eating:option"
+      ]
+    },
+    {
+      "id": "ef2324288e2b",
+      "text": "Wuri mai tsafta",
+      "sources": [
+        "hygiene/clothes/fold:option"
+      ]
+    },
+    {
+      "id": "cda7955268e6",
+      "text": "Yadda ake Goge Hakori",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "e233d9e1ee4b",
+      "text": "Yaƙi da Ƙwayoyin Cuta",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "7d60061a14b2",
+      "text": "Yana taimaka mana mu girma mu yi ƙarfi.",
+      "sources": [
+        "hygiene/food/good-food:hint"
+      ]
+    },
+    {
+      "id": "095a8f2bb5df",
+      "text": "Yanar gizo",
+      "sources": [
+        "literacy/story/spider:option"
+      ]
+    },
+    {
+      "id": "81d7b6ddc4d7",
+      "text": "Yanke Farce",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "ab63923119d2",
+      "text": "Yanzu jimla tana da kalmomi uku: uwa, tana dafa, abinci.",
+      "sources": [
+        "literacy/grammar/sentence2:hint"
+      ]
+    },
+    {
+      "id": "c668a303d1dc",
+      "text": "Yara",
+      "sources": [
+        "literacy/grammar/people:word",
+        "literacy/grammar/people:option"
+      ]
+    },
+    {
+      "id": "4f9c6c657c0d",
+      "text": "Yarinya da Wata",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "5e37f765f4ad",
+      "text": "Yarinyar ta kalli sama da dare, sai ta ga ….",
+      "sources": [
+        "literacy/story/moon:prompt"
+      ]
+    },
+    {
+      "id": "390e0f85f143",
+      "text": "Yaro",
+      "sources": [
+        "literacy/grammar/objects:option"
+      ]
+    },
+    {
+      "id": "78917bdfbc2a",
+      "text": "Yaron yana ….",
+      "sources": [
+        "literacy/grammar/actions:prompt"
+      ]
+    },
+    {
+      "id": "afa9ca3be149",
+      "text": "Yashi",
+      "sources": [
+        "hygiene/handwash/why:option",
+        "hygiene/handwash/dry:option",
+        "hygiene/body/bath:option",
+        "hygiene/clothes/wash-clothes:option",
+        "hygiene/food/vegetables:option"
+      ]
+    },
+    {
+      "id": "a06ac9189f7a",
+      "text": "Yatsa",
+      "sources": [
+        "hygiene/teeth/why-brush:option"
+      ]
+    },
+    {
+      "id": "0c4302a97174",
+      "text": "Yatsun hannu biyu su ne goma.",
+      "sources": [
+        "numeracy/addition/add-ten:hint"
+      ]
+    },
+    {
+      "id": "3e8ed7dd8e72",
+      "text": "Yi kuka",
+      "sources": [
+        "literacy/story/birds:option"
+      ]
+    },
+    {
+      "id": "173a8a90b286",
+      "text": "Yi nasara",
+      "sources": [
+        "literacy/story/birds:option"
+      ]
+    },
+    {
+      "id": "cf122262f8c8",
+      "text": "Yi sauri, amma kada ka tsallake lamba.",
+      "sources": [
+        "numeracy/games/count-race:hint"
+      ]
+    },
+    {
+      "id": "1471dadb2ce6",
+      "text": "Yi tunani da sauri, amma ka tabbatar.",
+      "sources": [
+        "numeracy/subtraction/sub-fast:hint"
+      ]
+    },
+    {
+      "id": "38811e4ab2a4",
+      "text": "Yi wanka aƙalla sau ɗaya kowace rana.",
+      "sources": [
+        "hygiene/body/bath:hint"
+      ]
+    },
+    {
+      "id": "2c03ad6623a8",
+      "text": "Yi wasa",
+      "sources": [
+        "hygiene/handwash/steps:option"
+      ]
+    },
+    {
+      "id": "7779fc1dd319",
+      "text": "Yin Wanka",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "3285566d23ab",
+      "text": "'Ya'yan itace",
+      "sources": [
+        "hygiene/food/fruits:word",
+        "hygiene/food/fruits:option",
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "7e7a8db1c9e8",
+      "text": "'Ya'yan itace suna ba mu lafiya.",
+      "sources": [
+        "hygiene/food/fruits:hint"
+      ]
+    },
+    {
+      "id": "adf2cb82438f",
+      "text": "Zaɓi darasi da kake so.",
+      "sources": [
+        "phrase:chooseALesson"
+      ]
+    },
+    {
+      "id": "9134312d9532",
+      "text": "Zaɓi darasi.",
+      "sources": [
+        "phrase:chooseAModule"
+      ]
+    },
+    {
+      "id": "ea93675605d9",
+      "text": "Zafi",
+      "sources": [
+        "hygiene/food/water:option"
+      ]
+    },
+    {
+      "id": "cf9dcdb74ac6",
+      "text": "Zaki",
+      "sources": [
+        "literacy/story/lion:word",
+        "literacy/story/lion:option"
+      ]
+    },
+    {
+      "id": "b83ce94524b6",
+      "text": "Zaki da Ɓera",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "f879ba1b8fbb",
+      "text": "Zama",
+      "sources": [
+        "literacy/grammar/actions:option"
+      ]
+    },
+    {
+      "id": "d9be169fb62f",
+      "text": "Zana Layuka",
+      "sources": [
+        "lesson-title"
+      ]
+    },
+    {
+      "id": "d66fcc742cc6",
+      "text": "Zara",
+      "sources": [
+        "literacy/reading/story:option"
+      ]
+    },
+    {
+      "id": "8dc2691c6734",
+      "text": "Zara ta tafi kasuwa da uwarta. Wa ya tafi kasuwa? ….",
+      "sources": [
+        "literacy/reading/story:prompt"
+      ]
+    }
+  ]
+}

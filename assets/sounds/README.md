@@ -1,20 +1,17 @@
-# Sound files (free sources)
+# Sound files
 
-Drop four short files here with these EXACT names:
+Four cues ship with the app and are required by `lib/feedback.ts`:
 
-  tap.mp3       - short soft click (button taps)
-  correct.mp3   - happy ding / chime (right answer)
-  wrong.mp3     - gentle buzz / boop (wrong answer)
-  success.mp3   - short celebration jingle (lesson complete)
+  tap.wav       - short soft click (button taps)
+  correct.wav   - rising two-note chime (right answer)
+  wrong.wav     - gentle falling boop (wrong answer)
+  success.wav   - short celebration arpeggio (lesson complete)
 
-## Free, license-safe sources
-- https://pixabay.com/sound-effects/   (free, no attribution required)
-- https://freesound.org/               (free; check each file's license)
-- https://mixkit.co/free-sound-effects/ (free)
+They are synthesised from pure tones, so they carry no third-party licence and
+can be redistributed with the app. `tools/gen_sounds.py` regenerates them.
 
-Search terms: "ui tap", "correct chime", "wrong buzz", "success jingle".
-Keep them short (under ~2s) and small (a few KB–100KB).
-
-## If you skip this
-The app runs fine with no sound files — audio just no-ops. Haptic vibration
-on tap still works on real devices.
+## Replacing them
+Keep the same filenames and extensions, or update the `SOURCES` map in
+`lib/feedback.ts`. Metro resolves `require()` at bundle time: if a file named
+here is missing, the bundle fails to build — it does not silently degrade.
+Keep clips short (under ~1s) and small.

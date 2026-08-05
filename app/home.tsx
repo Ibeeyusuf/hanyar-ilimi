@@ -9,8 +9,9 @@ import { navIcons } from "@/constants/images";
 import AppShell from "@/components/nav/AppShell";
 import Mascot from "@/components/Mascot";
 import SmartImage from "@/components/SmartImage";
-import { getSessionChildId, getChild, getTotalStars, getSubjectSummary, getNextLesson, type Child } from "@/lib/data";
+import { getSessionChildId, getChild, getTotalStars, getSubjectSummary, type Child } from "@/lib/data";
 import { speak } from "@/lib/speech";
+import { PHRASES } from "@/constants/phrases";
 import { feedback } from "@/lib/feedback";
 
 type Summary = { done: number; total: number; stars: number; percent: number };
@@ -42,16 +43,25 @@ export default function HomeScreen() {
       setChild(c ?? null);
       setStars(total);
       setSum(s);
-      speak(c ? `Sannu ${c.name}. Zabi abin da za ka koya.` : "Zabi abin da za ka koya.");
+      // The child's name was spoken here, but a Hausa name read by an English
+      // engine is worse than not saying it — and a name can never have a
+      // recorded clip. The greeting is a fixed line; the name is on screen.
+      speak(PHRASES.chooseWhatToLearn);
     })();
     return () => { alive = false; };
   }, []));
 
-  const open = async (subjectId: string) => {
+  /**
+   * A subject tile opens that subject's module list.
+   *
+   * This used to jump straight to the child's next unfinished lesson, which
+   * saved a tap but took away the map: a child could not see what they had
+   * done, what came next, or choose to go back over something. Landing on the
+   * module list keeps the structure visible, which is the point of the tile.
+   */
+  const open = (subjectId: string) => {
     feedback.tap();
-    const next = await getNextLesson(await getSessionChildId(), subjectId);
-    if (next) router.push(`/subject/${subjectId}/${next.moduleId}/${next.lessonId}`);
-    else router.push(`/subject/${subjectId}`);
+    router.push(`/subject/${subjectId}`);
   };
 
   const academic = SUBJECTS.filter((s) => s.id !== "hygiene");

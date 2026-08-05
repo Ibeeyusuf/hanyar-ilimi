@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { colors } from "@/constants/theme";
 import SceneBackdrop from "@/components/SceneBackdrop";
-import { checkFacilitatorPin } from "@/lib/data";
+import { checkFacilitatorPin, pinIsDefault } from "@/lib/data";
 import { feedback } from "@/lib/feedback";
 
 // PRD §4 S8: 4-digit PIN, 5 wrong -> 60s cooldown. Default PIN 1234 (demo).
@@ -12,6 +12,8 @@ export default function FacilitatorPin() {
   const [pin, setPin] = useState("");
   const [wrong, setWrong] = useState(0);
   const [cooldown, setCooldown] = useState(false);
+  const [isDefault, setIsDefault] = useState(false);
+  useEffect(() => { pinIsDefault().then(setIsDefault).catch(() => setIsDefault(false)); }, []);
 
   const press = async (d: string) => {
     if (cooldown) return;
@@ -42,7 +44,9 @@ export default function FacilitatorPin() {
               <Ionicons name="lock-closed" size={26} color={colors.purple} />
             </View>
             <Text className="mt-3 text-[18px] font-black" style={{ color: colors.ink }}>Facilitator Access</Text>
-            <Text className="text-[12px]" style={{ color: colors.inkSoft }}>Enter your 4-digit PIN (demo: 1234)</Text>
+            <Text className="text-[12px]" style={{ color: colors.inkSoft }}>
+              Enter your 4-digit PIN{isDefault ? " (still the default: 1234)" : ""}
+            </Text>
           </View>
 
           <View className="my-5 flex-row justify-center gap-3">

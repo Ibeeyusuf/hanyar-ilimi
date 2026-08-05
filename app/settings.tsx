@@ -1,42 +1,64 @@
-
 import { useState, useEffect } from "react";
 import { View, Text, ScrollView, Pressable, Switch } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { colors } from "@/constants/theme";
+import { elevation, surface } from "@/constants/ui";
 import AppShell from "@/components/nav/AppShell";
-import { setSoundEnabled } from "@/lib/feedback";
-import { setSpeechEnabled, hasHausaVoice } from "@/lib/speech";
-
-const LINKS = [
-  { t: "Profile Information", s: "View and update your personal details.", icon: "person", color: colors.purple },
-  { t: "Account & Security", s: "Change password and manage account security.", icon: "shield-checkmark", color: colors.green },
-  { t: "Parental Controls", s: "Manage screen time, content and app access.", icon: "people", color: colors.blue },
-];
+import { speak } from "@/lib/speech";
+import { PHRASES } from "@/constants/phrases";
+import { getPrefs, setPrefs, CLIP_RATES } from "@/lib/settings";
+import { logout, pinIsDefault } from "@/lib/data";
+import { feedback } from "@/lib/feedback";
 
 export default function SettingsScreen() {
-  // Be explicit about whether this device can actually speak Hausa.
-  const [hausa, setHausa] = useState<boolean | null>(null);
-  useEffect(() => { hasHausaVoice().then(setHausa).catch(() => setHausa(false)); }, []);
-  const [notif, setNotif] = useState(true);
+  const [defaultPin, setDefaultPin] = useState(false);
   const [sound, setSound] = useState(true);
+  const [speech, setSpeech] = useState(true);
+  const [rate, setRate] = useState(0.9);
+
+  useEffect(() => {
+    getPrefs().then((p) => { setSound(p.sound); setSpeech(p.speech); setRate(p.clipRate); });
+    pinIsDefault().then(setDefaultPin).catch(() => setDefaultPin(false));
+  }, []);
+
+  // LOG OUT has to end the session, not just change screen: on a shared
+  // tablet the next child's work would otherwise be recorded against this one.
+  const signOut = async () => { feedback.tap(); await logout(); router.replace("/(auth)/login"); };
+
+  const Row = ({ icon, color, title, subtitle, onPress, right }: {
+    icon: any; color: string; title: string; subtitle: string; onPress?: () => void; right?: React.ReactNode;
+  }) => (
+    <Pressable onPress={onPress} disabled={!onPress}
+      className="flex-row items-center gap-3 border-b py-3.5" style={{ borderColor: colors.line }}>
+      <View className="h-9 w-9 items-center justify-center rounded-full" style={{ backgroundColor: color }}>
+        <Ionicons name={icon} size={16} color="#fff" />
+      </View>
+      <View className="flex-1">
+        <Text className="text-[14px] font-bold" style={{ color: colors.ink }}>{title}</Text>
+        <Text className="text-[11px]" style={{ color: colors.inkSoft }}>{subtitle}</Text>
+      </View>
+      {right ?? (onPress ? <Ionicons name="chevron-forward" size={18} color={colors.inkSoft} /> : null)}
+    </Pressable>
+  );
+
   return (
-    <AppShell crumbs={[{ label: "LITERACY", color: colors.literacy }, { label: "MODULES" }, { label: "SETTINGS", active: true }]} showBee={false}>
-      <ScrollView contentContainerStyle={{ padding: 16 }}>
-        <View className="mb-4 flex-row items-center gap-3 rounded-2xl p-4" style={{ backgroundColor: hausa ? "#E7F4DC" : "#FFF6E5", borderWidth: 1, borderColor: hausa ? "#C7E3AE" : "#F0D9A8" }}>
-          <Ionicons name={hausa ? "checkmark-circle" : "information-circle"} size={20} color={hausa ? colors.greenDark : colors.gold} />
-          <View className="flex-1">
-            <Text className="text-[13px] font-black" style={{ color: colors.ink }}>
-              {hausa === null ? "Checking voice…" : hausa ? "Hausa voice available" : "No Hausa voice on this device"}
-            </Text>
-            <Text className="text-[11.5px]" style={{ color: colors.inkSoft }}>
-              {hausa
-                ? "Lessons are narrated in Hausa."
-                : "Lessons are narrated with the device's default voice. Installing a Hausa voice, or adding the recorded audio library, gives correct pronunciation."}
-            </Text>
-          </View>
-        </View>
-        <View className="rounded-3xl bg-white p-5" style={{ shadowColor: "#1F2A3C", shadowOpacity: 0.08, shadowRadius: 12, shadowOffset: { width: 0, height: 4 }, elevation: 3 }}>
+    <AppShell crumbs={[{ label: "SETTINGS", active: true }]} showBee={false}>
+      <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 40 }}>
+        {/* the PIN still being 1234 is worth saying out loud */}
+        {defaultPin && (
+          <Pressable onPress={() => router.push("/facilitator/pin")}
+            className="mb-4 flex-row items-center gap-3 rounded-2xl p-4" style={{ backgroundColor: "#FCEBEA", borderWidth: 1, borderColor: "#F3C9C9" }}>
+            <Ionicons name="warning" size={20} color={colors.red} />
+            <View className="flex-1">
+              <Text className="text-[13px] font-black" style={{ color: colors.ink }}>Facilitator PIN is still the default</Text>
+              <Text className="text-[11.5px]" style={{ color: colors.inkSoft }}>Open the facilitator dashboard to set your own 4-digit PIN.</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={colors.inkSoft} />
+          </Pressable>
+        )}
+
+        <View className="rounded-3xl bg-white p-5" style={{ borderWidth: 1, borderColor: surface.border, ...elevation.md }}>
           <View className="mb-4 flex-row items-center gap-3">
             <View className="h-12 w-12 items-center justify-center rounded-2xl" style={{ backgroundColor: colors.purpleSoft }}>
               <Ionicons name="settings" size={24} color={colors.purple} />
@@ -47,41 +69,59 @@ export default function SettingsScreen() {
             </View>
           </View>
 
-          {LINKS.map((l) => (
-            <Pressable key={l.t} className="flex-row items-center gap-3 border-b py-3.5" style={{ borderColor: colors.line }}>
-              <View className="h-9 w-9 items-center justify-center rounded-full" style={{ backgroundColor: l.color }}>
-                <Ionicons name={l.icon as any} size={16} color="#fff" />
-              </View>
-              <View className="flex-1">
-                <Text className="text-[14px] font-bold" style={{ color: colors.ink }}>{l.t}</Text>
-                <Text className="text-[11px]" style={{ color: colors.inkSoft }}>{l.s}</Text>
-              </View>
-              <Ionicons name="chevron-forward" size={18} color={colors.inkSoft} />
-            </Pressable>
-          ))}
+          <Row icon="person" color={colors.purple} title="My profile"
+            subtitle="Name, stars, lessons and attendance."
+            onPress={() => { feedback.tap(); router.push("/profile"); }} />
 
-          <View className="flex-row items-center gap-3 border-b py-3.5" style={{ borderColor: colors.line }}>
-            <View className="h-9 w-9 items-center justify-center rounded-full" style={{ backgroundColor: colors.gold }}>
-              <Ionicons name="notifications" size={16} color="#fff" />
-            </View>
-            <View className="flex-1">
-              <Text className="text-[14px] font-bold" style={{ color: colors.ink }}>Notifications</Text>
-              <Text className="text-[11px]" style={{ color: colors.inkSoft }}>Choose what notifications you want to receive.</Text>
-            </View>
-            <Switch value={notif} onValueChange={setNotif} trackColor={{ true: colors.purple }} />
-          </View>
-          <View className="flex-row items-center gap-3 border-b py-3.5" style={{ borderColor: colors.line }}>
-            <View className="h-9 w-9 items-center justify-center rounded-full" style={{ backgroundColor: colors.red }}>
-              <Ionicons name="musical-notes" size={16} color="#fff" />
-            </View>
-            <View className="flex-1">
-              <Text className="text-[14px] font-bold" style={{ color: colors.ink }}>Sound & Music</Text>
-              <Text className="text-[11px]" style={{ color: colors.inkSoft }}>Control background music and sound effects.</Text>
-            </View>
-            <Switch value={sound} onValueChange={(v) => { setSound(v); setSoundEnabled(v); setSpeechEnabled(v); }} trackColor={{ true: colors.purple }} />
-          </View>
+          <Row icon="stats-chart" color={colors.blue} title="My progress"
+            subtitle="What you have learned so far."
+            onPress={() => { feedback.tap(); router.push("/progress"); }} />
 
-          <Pressable onPress={() => router.replace("/(auth)/login")} className="mt-4 flex-row items-center gap-3 rounded-2xl p-3.5" style={{ backgroundColor: "#FCEBEA" }}>
+          <Row icon="school" color={colors.green} title="Facilitator area"
+            subtitle="PIN protected: enrolment, attendance and sync."
+            onPress={() => { feedback.tap(); router.push("/facilitator/pin"); }} />
+
+          <Row icon="volume-high" color={colors.gold} title="Narration"
+            subtitle="Read lessons and instructions aloud."
+            right={<Switch value={speech} trackColor={{ true: colors.purple }}
+              onValueChange={async (v) => { setSpeech(v); await setPrefs({ speech: v }); if (v) speak(PHRASES.hello); }} />} />
+
+          {/* Narration speed. The recordings were generated by a model that
+              speaks quickly; how slow is slow enough depends on the child, so
+              this is a setting rather than something baked into the files.
+              Tapping a speed speaks a line at it, because the only way to
+              judge this is by ear. */}
+          {speech && (
+            <View className="mb-3 rounded-2xl bg-white p-4" style={{ borderWidth: 1, borderColor: surface.border, ...elevation.sm }}>
+              <View className="mb-1 flex-row items-center gap-2">
+                <Ionicons name="speedometer" size={17} color={colors.blue} />
+                <Text className="text-[14px] font-bold" style={{ color: colors.ink }}>Narration speed</Text>
+              </View>
+              <Text className="mb-3 text-[11.5px]" style={{ color: colors.inkSoft }}>
+                Tap one to hear it. Younger children usually need slower.
+              </Text>
+              <View className="flex-row gap-2">
+                {CLIP_RATES.map((r) => {
+                  const on = Math.abs(rate - r.value) < 0.01;
+                  return (
+                    <Pressable key={r.value}
+                      onPress={async () => { setRate(r.value); await setPrefs({ clipRate: r.value }); speak(PHRASES.listenAndChoose); }}
+                      className="flex-1 items-center rounded-2xl py-2.5"
+                      style={{ backgroundColor: on ? colors.blue : "#fff", borderWidth: 1.5, borderColor: on ? colors.blue : colors.line }}>
+                      <Text className="text-[11.5px] font-bold" style={{ color: on ? "#fff" : colors.ink }}>{r.label}</Text>
+                    </Pressable>
+                  );
+                })}
+              </View>
+            </View>
+          )}
+
+          <Row icon="musical-notes" color={colors.red} title="Sound effects"
+            subtitle="Taps, correct and celebration sounds."
+            right={<Switch value={sound} trackColor={{ true: colors.purple }}
+              onValueChange={async (v) => { setSound(v); await setPrefs({ sound: v }); if (v) feedback.tap(); }} />} />
+
+          <Pressable onPress={signOut} className="mt-4 flex-row items-center gap-3 rounded-2xl p-3.5" style={{ backgroundColor: "#FCEBEA" }}>
             <Ionicons name="log-out" size={20} color={colors.red} />
             <View>
               <Text className="text-[14px] font-bold" style={{ color: colors.red }}>Log Out</Text>

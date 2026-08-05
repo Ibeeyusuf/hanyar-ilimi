@@ -1,28 +1,18 @@
 /**
- * Progress + mastery + adaptivity (PRD §3.3–§3.5).
- * - Stars only ever increase (§3.5).
- * - Pass ≥70% unlocks next lesson (§3.4).
- * - Same skill failed twice => needsHelp flag (§3.4).
+ * Progress + mastery storage (PRD §3.3–§3.5).
+ *
+ * This file is responsible for reading and writing; the rules it applies —
+ * pass mark, stars, the needs-help threshold — live in ./rules.ts so they can
+ * be tested without a device. Do not re-inline a threshold here.
  */
 import { LessonProgress, SkillMastery, StrandId, Assessment } from "./types";
 import { KEYS, readJSON, writeJSON } from "./store";
 import { logEvent } from "./events";
-
-const PASS = 0.7;
-
-function starsFor(score: number): number {
-  if (score >= 0.9) return 3;
-  if (score >= PASS) return 2;
-  return 1; // attempt still earns 1 — no fail states (§3.5)
-}
+import { applyAttempt, applyMastery, isPass, percentage, FAIL_STREAK_FOR_HELP } from "./rules";
 
 export async function getProgress(childId: string): Promise<LessonProgress[]> {
   const all = await readJSON<LessonProgress[]>(KEYS.progress, []);
   return all.filter((p) => p.childId === childId);
-}
-
-export async function getLessonProgress(childId: string, lessonId: string): Promise<LessonProgress | undefined> {
-  return (await getProgress(childId)).find((p) => p.lessonId === lessonId);
 }
 
 // Record a completed lesson quiz. Returns stars earned + whether it passed.
@@ -31,22 +21,13 @@ export async function completeLesson(
   score: number, skillIds: string[]
 ): Promise<{ stars: number; passed: boolean }> {
   const all = await readJSON<LessonProgress[]>(KEYS.progress, []);
-  const stars = starsFor(score);
-  const passed = score >= PASS;
+  const passed = isPass(score);
 
   const i = all.findIndex((p) => p.childId === childId && p.lessonId === lessonId);
-  if (i >= 0) {
-    const prev = all[i];
-    all[i] = {
-      ...prev,
-      stars: Math.max(prev.stars, stars),      // stars only increase (§3.5)
-      bestScore: Math.max(prev.bestScore, score),
-      attempts: prev.attempts + 1,
-      completedAt: passed ? Date.now() : prev.completedAt,
-    };
-  } else {
-    all.push({ childId, strand, levelId, lessonId, stars, bestScore: score, attempts: 1, completedAt: passed ? Date.now() : undefined });
-  }
+  const merged = applyAttempt(i >= 0 ? all[i] : undefined, score, Date.now());
+  if (i >= 0) all[i] = { ...all[i], ...merged };
+  else all.push({ childId, strand, levelId, lessonId, ...merged });
+  const stars = merged.stars;
   await writeJSON(KEYS.progress, all);
   await updateMastery(childId, deviceId, skillIds, passed);
   await logEvent("lesson_complete", childId, deviceId, { strand, levelId, lessonId, score, stars, passed });
@@ -61,13 +42,15 @@ export async function getMastery(childId: string): Promise<SkillMastery[]> {
 async function updateMastery(childId: string, deviceId: string, skillIds: string[], passed: boolean): Promise<void> {
   const all = await readJSON<SkillMastery[]>(KEYS.mastery, []);
   for (const skillId of skillIds) {
-    let m = all.find((x) => x.childId === childId && x.skillId === skillId);
-    if (!m) { m = { childId, skillId, correct: 0, total: 0, failStreak: 0, needsHelp: false }; all.push(m); }
-    m.total += 1;
-    if (passed) { m.correct += 1; m.failStreak = 0; m.needsHelp = false; }
-    else {
-      m.failStreak += 1;
-      if (m.failStreak >= 2) { m.needsHelp = true; await logEvent("flag", childId, deviceId, { skillId, reason: "failed_twice" }); }
+    const i = all.findIndex((x) => x.childId === childId && x.skillId === skillId);
+    const before = i >= 0 ? all[i] : undefined;
+    const after = applyMastery(before, passed);
+    if (i >= 0) all[i] = { ...all[i], ...after };
+    else all.push({ childId, skillId, ...after });
+    // Flag only on the transition, so a child who is already flagged does not
+    // generate a fresh event on every further attempt.
+    if (after.needsHelp && !before?.needsHelp) {
+      await logEvent("flag", childId, deviceId, { skillId, reason: `failed_${FAIL_STREAK_FOR_HELP}_times` });
     }
   }
   await writeJSON(KEYS.mastery, all);
@@ -87,7 +70,7 @@ export async function masteryPercent(childId: string): Promise<number> {
   if (!ms.length) return 0;
   const c = ms.reduce((s, m) => s + m.correct, 0);
   const t = ms.reduce((s, m) => s + m.total, 0);
-  return t ? Math.round((c / t) * 100) : 0;
+  return percentage(c, t);
 }
 
 /**

@@ -1,25 +1,42 @@
 import { View, Text, Pressable, ScrollView, useWindowDimensions } from "react-native";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { router, useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams, useFocusEffect } from "expo-router";
 import { speak } from "@/lib/speech";
+import { PHRASES } from "@/constants/phrases";
 import { colors, NAV } from "@/constants/theme";
 import { elevation, surface } from "@/constants/ui";
-import { SUBJECTS, MODULES } from "@/constants/content";
+import { SUBJECTS } from "@/constants/content";
 import { moduleArt } from "@/constants/images";
 import SmartImage from "@/components/SmartImage";
 import AppShell from "@/components/nav/AppShell";
 import { isDownloaded, setDownloaded } from "@/lib/offline";
+import { getSessionChildId, getModuleStates, type ModuleState } from "@/lib/data";
 import { feedback } from "@/lib/feedback";
 
 export default function ModulesScreen() {
   // FR-1.2: speak the screen instruction on load
-  useEffect(() => { speak("Zabi darasi"); }, []);
+  useEffect(() => { speak(PHRASES.chooseAModule); }, []);
   const { subject } = useLocalSearchParams<{ subject: string }>();
   const meta = SUBJECTS.find((s) => s.id === subject) ?? SUBJECTS[0];
-  const modules = MODULES[meta.id] ?? [];
   const { width } = useWindowDimensions();
   const cardW = width >= NAV.breakpoint ? "31%" : width >= 560 ? "47%" : "100%";
+
+  /**
+   * Module cards used to render a `progress` number hardcoded in content.ts —
+   * a brand-new child was shown "GRAMMAR 75%". Both the bar and the lock now
+   * come from what this child has actually completed.
+   */
+  const [modules, setModules] = useState<ModuleState[]>([]);
+  useFocusEffect(useCallback(() => {
+    let alive = true;
+    (async () => {
+      const childId = await getSessionChildId();
+      const states = await getModuleStates(childId, meta.id);
+      if (alive) setModules(states);
+    })();
+    return () => { alive = false; };
+  }, [meta.id]));
 
   const [downloaded, setDl] = useState(false);
   useEffect(() => { isDownloaded(meta.id).then(setDl); }, [meta.id]);
@@ -45,42 +62,44 @@ export default function ModulesScreen() {
         </Pressable>
 
         <View className="flex-row flex-wrap justify-center" style={{ gap: 16 }}>
-          {modules.map((m, i) => {
-            const locked = i > 1 && m.progress === 0;
-            return (
-              <Pressable key={m.id} disabled={locked} onPress={() => router.push(`/subject/${meta.id}/${m.id}`)}
-                style={{ width: cardW as any, opacity: locked ? 0.6 : 1 }}>
-                {/* clean module card — designer icon if available, else a clean subject icon */}
-                <View className="rounded-3xl p-4" style={{ backgroundColor: "#fff", borderWidth: 1, borderColor: surface.border, ...elevation.sm }}>
-                  <View className="h-24 items-center justify-center">
-                    {moduleArt[m.id] ? (
-                      <SmartImage source={moduleArt[m.id]} size={72} />
-                    ) : (
-                      <View className="h-[68px] w-[68px] items-center justify-center rounded-2xl" style={{ backgroundColor: (meta.color ?? colors.purple) + "22" }}>
-                        <Ionicons name={(m.icon as any) ?? "ellipse"} size={34} color={meta.color ?? colors.purple} />
-                      </View>
-                    )}
+          {modules.map((m) => (
+            <Pressable key={m.id} disabled={m.locked}
+              onPress={() => { feedback.tap(); router.push(`/subject/${meta.id}/${m.id}`); }}
+              style={{ width: cardW as any, opacity: m.locked ? 0.6 : 1 }}>
+              <View className="rounded-3xl p-4" style={{ backgroundColor: "#fff", borderWidth: 1, borderColor: surface.border, ...elevation.sm }}>
+                <View className="h-24 items-center justify-center">
+                  {moduleArt[m.id] ? (
+                    <SmartImage source={moduleArt[m.id]} size={72} />
+                  ) : (
+                    <View className="h-[68px] w-[68px] items-center justify-center rounded-2xl" style={{ backgroundColor: (meta.color ?? colors.purple) + "22" }}>
+                      <Ionicons name={(m.icon as any) ?? "ellipse"} size={34} color={meta.color ?? colors.purple} />
+                    </View>
+                  )}
+                </View>
+              </View>
+              {/* label bar */}
+              <View className="mt-2 rounded-2xl px-3 py-2" style={{ backgroundColor: "#6E5836" }}>
+                <View className="flex-row items-center justify-between">
+                  <View className="flex-1">
+                    <Text className="text-[13px] font-black text-white">{m.num}. {m.en}</Text>
+                    <Text className="text-[11px]" style={{ color: "#E7D9BC" }}>{m.ha}</Text>
+                  </View>
+                  <View className="h-7 w-7 items-center justify-center rounded-full" style={{ backgroundColor: m.locked ? colors.inkSoft : colors.purple }}>
+                    <Ionicons name={m.locked ? "lock-closed" : "star"} size={14} color="#fff" />
                   </View>
                 </View>
-                {/* label bar */}
-                <View className="mt-2 rounded-2xl px-3 py-2" style={{ backgroundColor: "#6E5836" }}>
-                  <View className="flex-row items-center justify-between">
-                    <View className="flex-1">
-                      <Text className="text-[13px] font-black text-white">{m.num}. {m.en}</Text>
-                      <Text className="text-[11px]" style={{ color: "#E7D9BC" }}>{m.ha}</Text>
-                    </View>
-                    <View className="h-7 w-7 items-center justify-center rounded-full" style={{ backgroundColor: locked ? colors.inkSoft : colors.purple }}>
-                      <Ionicons name={locked ? "lock-closed" : "star"} size={14} color="#fff" />
-                    </View>
-                  </View>
-                  <View className="mt-2 h-2 overflow-hidden rounded-full" style={{ backgroundColor: "#4E3F27" }}>
-                    <View className="h-2 rounded-full" style={{ width: `${m.progress}%`, backgroundColor: colors.green }} />
-                  </View>
-                  <Text className="mt-0.5 text-right text-[10px]" style={{ color: "#E7D9BC" }}>{m.progress}%</Text>
+                <View className="mt-2 h-2 overflow-hidden rounded-full" style={{ backgroundColor: "#4E3F27" }}>
+                  <View className="h-2 rounded-full" style={{ width: `${m.percent}%`, backgroundColor: colors.green }} />
                 </View>
-              </Pressable>
-            );
-          })}
+                <View className="flex-row items-center justify-between">
+                  <Text className="text-[10px]" style={{ color: "#E7D9BC" }}>
+                    {m.locked ? "Kammala darasin baya tukuna" : `${m.stars} ⭐`}
+                  </Text>
+                  <Text className="text-[10px]" style={{ color: "#E7D9BC" }}>{m.percent}%</Text>
+                </View>
+              </View>
+            </Pressable>
+          ))}
         </View>
       </ScrollView>
     </AppShell>

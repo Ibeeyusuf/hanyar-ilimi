@@ -9,7 +9,6 @@ export const characters = {
   bee: require("@/assets/images/mascots/bee.png"),
   ladybug: require("@/assets/images/mascots/ladybug.png"),
   caterpillar: require("@/assets/images/mascots/caterpillar.png"),
-  kids: null as ImageSource,
   kid1: require("@/assets/images/characters/kid1.png"),
   kid2: require("@/assets/images/characters/kid2.png"),
   boyWave: require("@/assets/images/characters/boy-wave.png"),
@@ -19,11 +18,25 @@ export const brand = { logo: require("@/assets/images/brand/logo.png") };
 
 // Child profile portraits for the "Who are you?" picker (PRD S2).
 // Six distinct faces so each child can recognise their own.
-export const avatarSet = [
+/**
+ * Stock portraits, used when a child has no photo of their own.
+ *
+ * Split by sex because the fallback used to hash a child's ID across the whole
+ * set, which handed girls a boy's face and vice versa — on the one screen where
+ * a child has to recognise themselves.
+ *
+ * avatar6.png is deliberately absent: it is a log-out door icon, not a child.
+ * It was in this list for two releases and could have been shown to a child as
+ * their own face.
+ */
+export const girlAvatars = [
   require("@/assets/images/avatars/avatar1.png"),
   require("@/assets/images/avatars/avatar2.png"),
-  require("@/assets/images/avatars/avatar3.png"),
   require("@/assets/images/avatars/avatar4.png"),
+];
+
+export const boyAvatars = [
+  require("@/assets/images/avatars/avatar3.png"),
   require("@/assets/images/avatars/avatar5.png"),
 ];
 
@@ -56,6 +69,10 @@ export const objects = {
   toothbrush: require("@/assets/images/objects/toothbrush.png"),
   plate: require("@/assets/images/objects/plate.png"),
   fish: require("@/assets/images/objects/fish.png"),
+  ball: require("@/assets/images/objects/ball.png"),
+  clock: require("@/assets/images/objects/clock.png"),
+  globe: require("@/assets/images/objects/globe.png"),
+  tree: require("@/assets/images/objects/tree.png"),
 };
 
 // Picture-passcode icons (child login).
@@ -70,6 +87,36 @@ export const passcode = {
   bird: require("@/assets/images/passcode/bird.png"),
   car: require("@/assets/images/passcode/car.png"),
 };
+/**
+ * Maps a lesson's `visual` key to real artwork. Both the lesson player and the
+ * quiz used to keep their own private copy of this table, which meant a new
+ * illustration had to be registered twice or the two screens disagreed.
+ */
+export function artForVisual(visual: string): ImageSource {
+  const map: Record<string, ImageSource> = {
+    "kids": characters.kid1,
+    "\u{1F34E}": objects.apple,
+    "\u{1FA91}": objects.chair,
+    "\u2615": objects.cup,
+    "\u270F\uFE0F": objects.pencil,
+    "\u{1F426}": objects.bird,
+    "\u{1F4D6}": objects.bookOpen,
+    "\u{1F170}\uFE0F": objects.bookAb,
+    "\u{1F415}": objects.dog,
+    "\u{1F469}": objects.mother,
+    "\u{1F9FC}": objects.soap,
+    "\u{1F3C3}": objects.running,
+    "\u{1FAA5}": objects.toothbrush,
+    "\u{1F37D}\uFE0F": objects.plate,
+    "\u{1F41F}": objects.fish,
+    "\u26BD": objects.ball,
+    "\u{1F550}": objects.clock,
+    "\u{1F30D}": objects.globe,
+    "\u{1F333}": objects.tree,
+  };
+  return map[visual] ?? null;
+}
+
 export const PASSCODE_ORDER = [
   passcode.ball, passcode.star, passcode.paw,
   passcode.apple, passcode.cat, passcode.drum,

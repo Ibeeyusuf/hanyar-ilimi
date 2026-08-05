@@ -5,6 +5,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import { colors } from "@/constants/theme";
 import SceneBackdrop from "@/components/SceneBackdrop";
 import { speak } from "@/lib/speech";
+import { PHRASES } from "@/constants/phrases";
 import { feedback } from "@/lib/feedback";
 import { saveAssessment, getDevice } from "@/lib/data";
 
@@ -26,11 +27,11 @@ export default function Placement() {
 
   const answer = (i: number) => {
     const ok = i === QUESTIONS[idx].answer;
-    ok ? feedback.correct() : feedback.wrong();
+    if (ok) feedback.correct(); else feedback.wrong();
     const nc = correct + (ok ? 1 : 0);
     setCorrect(nc);
     if (idx < QUESTIONS.length - 1) setIdx(idx + 1);
-    else { setDone(true); speak("Madalla"); }
+    else { setDone(true); speak(PHRASES.wellDone); }
   };
 
   const level = correct <= 1 ? 1 : correct <= 3 ? 2 : 3;

@@ -14,17 +14,19 @@ export type Child = {
   sex: "f" | "m";
   dobEst?: number;       // approximate birth year
   photoUri?: string;     // local-only, never synced (PRD §7)
-  passcode: number[];    // ordered indices into the 9-icon grid (hashed in prod)
   deviceId: string;
   groupId?: string;
   enrolledAt: number;
   status: "active" | "exited";
+  // NOTE: the picture passcode is deliberately NOT stored on this record.
+  // It lives in encrypted storage (lib/data/secure.ts) and is reached only
+  // through setChildPasscode / getChildPasscode / verifyPasscode.
 };
 
 export type Device = {
   id: string;
   name: string;
-  pinHash: string;       // facilitator PIN (plain-ish for prototype; hash in prod)
+  pinIsDefault: boolean;  // true until a facilitator sets their own PIN
   assignedChildren: string[];
   appVersion: string;
   contentVersion: string;

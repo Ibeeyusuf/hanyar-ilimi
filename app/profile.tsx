@@ -4,10 +4,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { router, useFocusEffect } from "expo-router";
 import { colors } from "@/constants/theme";
 import { elevation, surface } from "@/constants/ui";
-import { SUBJECTS } from "@/constants/content";
 import AppShell from "@/components/nav/AppShell";
-import Mascot from "@/components/Mascot";
-import { getSessionChildId, getChild, getTotalStars, getSubjectSummary, getEvents, logout, type Child } from "@/lib/data";
+import ChildPortrait from "@/components/ChildPortrait";
+import { getSessionChildId, getChild, getTotalStars, getOverallSummary, getEvents, logout, type Child } from "@/lib/data";
 import { feedback } from "@/lib/feedback";
 
 /** MY PROFILE — the child's real record. No invented figures. */
@@ -23,8 +22,8 @@ export default function ProfileScreen() {
       const id = await getSessionChildId();
       const c = id ? await getChild(id) : undefined;
       const total = await getTotalStars(id);
-      let d = 0;
-      for (const s of SUBJECTS) d += (await getSubjectSummary(id, s.id)).done;
+      const summary = await getOverallSummary(id);
+      const d = Object.values(summary).reduce((a, s) => a + s.done, 0);
       // distinct days this child has logged in (attendance)
       const evs = await getEvents();
       const set = new Set(evs.filter((e) => e.type === "login" && e.childId === id)
@@ -41,7 +40,7 @@ export default function ProfileScreen() {
     <AppShell crumbs={[{ label: "MY PROFILE", active: true }]}>
       <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 40 }}>
         <View className="items-center rounded-3xl bg-white p-6" style={{ borderWidth: 1, borderColor: surface.border, ...elevation.md }}>
-          <Mascot size={84} />
+          <ChildPortrait child={child} size={92} ringColor={colors.purple} ringWidth={3} />
           <Text className="mt-2 text-[22px] font-black" style={{ color: colors.purple }}>{child?.name ?? "—"}</Text>
           <Text className="text-[12px]" style={{ color: colors.inkSoft }}>
             {child?.sex === "f" ? "Yarinya" : child?.sex === "m" ? "Yaro" : ""}

@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { View, StyleSheet } from "react-native";
-import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withTiming, Easing } from "react-native-reanimated";
+import Animated, { useAnimatedStyle, useSharedValue, withDelay, withRepeat, withTiming, Easing } from "react-native-reanimated";
 import Svg, { Ellipse, G } from "react-native-svg";
 
 // Subtle slow-drifting clouds layered over the backdrop. Kept separate from
 // SceneBackdrop so the static scene stays rock-solid. Very gentle — adds life
 // without distracting from lessons.
 function Cloud({ delay, duration, top, scale, opacity }: { delay: number; duration: number; top: number; scale: number; opacity: number }) {
-  const x = useSharedValue(-120);
+  const x = useSharedValue(0);
   useEffect(() => {
-    x.value = withRepeat(withTiming(1, { duration, easing: Easing.linear }), -1, false);
-  }, []);
+    x.value = withDelay(delay, withRepeat(withTiming(1, { duration, easing: Easing.linear }), -1, false));
+  }, [delay, duration, x]);
   const style = useAnimatedStyle(() => ({ transform: [{ translateX: -120 + x.value * 700 }, { scale }] }));
   return (
     <Animated.View style={[{ position: "absolute", top, opacity }, style]}>

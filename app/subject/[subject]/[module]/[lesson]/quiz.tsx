@@ -5,28 +5,27 @@ import { router, useLocalSearchParams } from "expo-router";
 import { colors, NAV } from "@/constants/theme";
 import { SUBJECTS, MODULES, getLessons } from "@/constants/content";
 import { contentFor } from "@/constants/lessonContent";
-import { objects } from "@/constants/images";
+import { artForVisual, objects } from "@/constants/images";
 import { speak } from "@/lib/speech";
+import { PHRASES } from "@/constants/phrases";
 import AppShell from "@/components/nav/AppShell";
 import RightRail from "@/components/RightRail";
 import PopIn from "@/components/ui/PopIn";
 import { feedback } from "@/lib/feedback";
 import { shuffle } from "@/lib/shuffle";
 import Celebration from "@/components/Celebration";
-import { getSessionChildId, getDevice, completeLesson, type StrandId } from "@/lib/data";
+import NumeracyQuiz, { NUMERACY_STEPS } from "@/components/NumeracyQuiz";
+import { getSessionChildId, getDevice, completeLesson, logEvent, type StrandId } from "@/lib/data";
 
-// Real artwork for the lesson's subject, so the match step shows the picture
-// the child just learned rather than a generic emoji.
-const LESSON_ART: Record<string, any> = {
-  "🍎": objects.apple, "🪑": objects.chair, "☕": objects.cup, "✏️": objects.pencil,
-  "🐦": objects.bird, "📖": objects.bookOpen, "🅰️": objects.bookAb, "🐕": objects.dog,
-  "👩": objects.mother, "🧼": objects.soap, "🏃": objects.running,
-  "🪥": objects.toothbrush, "🍽️": objects.plate, "🐟": objects.fish,
+const LITERACY_STEPS = ["choice", "match", "write", "trace"] as const;
+
+// Only steps with a single right answer can be marked. Writing and tracing are
+// practice: the app cannot judge a traced letter or a free-typed sentence, and
+// pretending otherwise would put a fabricated number into a child's record.
+const GRADED: Record<string, boolean> = {
+  choice: true, match: true, write: false, trace: false,
+  count: true, matchNum: true, add: true,
 };
-import NumeracyQuiz, { useNumeracySteps } from "@/components/NumeracyQuiz";
-
-const STEPS = ["choice", "match", "write", "trace"] as const;
-type Step = (typeof STEPS)[number];
 
 export default function QuizScreen() {
   const { subject, module, lesson } = useLocalSearchParams<{ subject: string; module: string; lesson: string }>();
@@ -34,39 +33,73 @@ export default function QuizScreen() {
   const modMeta = MODULES[meta.id]?.find((m) => m.id === module);
   const { width } = useWindowDimensions();
   const showRail = width >= NAV.breakpoint;
+  // Answer tiles: two per row on a phone, natural width on anything larger.
+  const narrow = width < 600;
   const isNumeracy = meta.id === "numeracy";
-  const numSteps = useNumeracySteps();
+
+  const steps: readonly string[] = isNumeracy ? NUMERACY_STEPS : LITERACY_STEPS;
+  const gradedSteps = steps.filter((s) => GRADED[s]);
+  const totalSteps = steps.length;
 
   const [idx, setIdx] = useState(0);
   const [celebrate, setCelebrate] = useState(false);
-  const [numDone, setNumDone] = useState(false);
-  const [earnedXp, setEarnedXp] = useState(10);
-  const step = STEPS[idx];
-  // FR-6.1: distractor positions randomised per attempt
-  // The quiz is about THIS lesson — options come from its own content, so no
-  // two lessons ever present the same question.
+  const [earnedStars, setEarnedStars] = useState(0);
+  const step = steps[idx];
+
   const lessons = getLessons(meta.id, module as string);
   const active = lessons.find((l) => l.id === lesson) ?? lessons[0];
   const content = contentFor(meta.id, module as string, active?.id ?? "", active?.ha ?? "", lessons);
-  const choiceOptions = useMemo(() => shuffle(content.options), [idx, active?.id]);
-  const matchOptions = useMemo(() => shuffle(content.options), [idx, active?.id]);
-  const [choice, setChoice] = useState<string | null>(null);
-  const [match, setMatch] = useState<string | null>(null);
+
+  // FR-6.1: distractor positions randomised per attempt.
+  const choiceOptions = useMemo(() => shuffle(content.options), [content.options]);
+  const matchOptions = useMemo(() => shuffle(content.options), [content.options]);
+
+  /**
+   * Marking. `firstTry` is the child's FIRST answer on each graded step and is
+   * what the score is built from — it is the only honest measure of whether
+   * they knew it. `solved` records that they eventually got there, which is
+   * what lets them move on. Previously this screen passed a hardcoded score of
+   * 1 to completeLesson, so every lesson awarded three stars whatever the
+   * child answered, and the "needs help" flag could never fire.
+   */
+  const [firstTry, setFirstTry] = useState<Record<string, boolean>>({});
+  const [solved, setSolved] = useState<Record<string, boolean>>({});
+  const [picked, setPicked] = useState<Record<string, string | number>>({});
   const [text, setText] = useState("");
   const [traced, setTraced] = useState(false);
 
-  const totalSteps = isNumeracy ? numSteps.length : STEPS.length;
+  const answer = async (key: string, value: string | number, correct: boolean) => {
+    setPicked((p) => ({ ...p, [key]: value }));
+    setFirstTry((f) => (key in f ? f : { ...f, [key]: correct }));
+    if (correct) setSolved((s) => ({ ...s, [key]: true }));
+    if (correct) feedback.correct(); else feedback.wrong();
+    if (!correct) speak(PHRASES.tryAgain);
+    // FR-5.3: every item response is logged, not just completions.
+    try {
+      const childId = await getSessionChildId();
+      const device = await getDevice();
+      if (childId) {
+        await logEvent("item_response", childId, device.id, {
+          kind: "answer", lesson: active?.id, step: key, correct,
+          firstAttempt: !(key in firstTry),
+        });
+      }
+    } catch {}
+  };
 
-  const done = isNumeracy
-    ? numDone
-    : (step === "choice" && !!choice) ||
-      (step === "match" && !!match) ||
-      (step === "write" && text.trim().length > 2) ||
-      (step === "trace" && traced);
+  // A graded step advances once the child has reached the right answer — no
+  // dead ends, and no advancing on a wrong tap either (PRD §3.5, no fail states).
+  const done = GRADED[step]
+    ? !!solved[step]
+    : step === "write" ? text.trim().length > 2
+    : step === "trace" ? traced
+    : true;
+
+  const correctFirstTime = gradedSteps.filter((s) => firstTry[s]).length;
 
   const finishAndSave = async () => {
-    // Simple score: pass if the final step was completed correctly.
-    const score = 1; // reaching the end with correct answers -> full marks in this prototype
+    const score = gradedSteps.length ? correctFirstTime / gradedSteps.length : 0;
+    let stars = 0;
     try {
       const childId = await getSessionChildId();
       const device = await getDevice();
@@ -80,15 +113,29 @@ export default function QuizScreen() {
           score,
           [`${meta.id}.${modMeta?.id}`]
         );
-        setEarnedXp(res.stars * 10);        // 10 XP per star actually earned
+        stars = res.stars;
       }
     } catch {}
+    setEarnedStars(stars);
     setCelebrate(true);
   };
-  const next = () => { if (idx < totalSteps - 1) { setIdx(idx + 1); setNumDone(false); } else finishAndSave(); };
 
-  const hint = isNumeracy ? "Ƙidaya a hankali, sannan ka zaɓi lambar da ta dace." : step === "choice" ? "Saurari kalmar maimaita." : step === "match" ? "Ka saurari kalmar sau biyu idan kana bukata." : step === "write" ? "Ka tuna fara da babban harafi kuma ka saka alama (.)" : "Ka bi layin dot-dot din da yatsanka ko fensirinka.";
-  const title = step === "choice" ? "QUIZ 1" : step === "match" ? "QUIZ 2" : step === "write" ? "QUIZ – WRITING" : "TRACING TIME!";
+  const next = () => { if (idx < totalSteps - 1) setIdx(idx + 1); else finishAndSave(); };
+  const isLast = idx === totalSteps - 1;
+
+  const hint = isNumeracy
+    ? "Ƙidaya a hankali, sannan ka zaɓi lambar da ta dace."
+    : step === "choice" ? "Saurari kalmar sannan ka zaɓi amsar da ta dace."
+    : step === "match" ? "Ka saurari kalmar sau biyu idan kana bukata."
+    : step === "write" ? "Ka tuna fara da babban harafi kuma ka saka alama (.)"
+    : "Ka bi layin dot-dot din da yatsanka ko fensirinka.";
+
+  const title = isNumeracy ? `LISSAFI ${idx + 1}`
+    : step === "choice" ? "QUIZ 1"
+    : step === "match" ? "QUIZ 2"
+    : step === "write" ? "QUIZ – WRITING" : "TRACING TIME!";
+
+  const lessonArt = artForVisual(content.visual);
 
   return (
     <AppShell showBee={!showRail}
@@ -100,7 +147,7 @@ export default function QuizScreen() {
               <View className="h-10 w-10 items-center justify-center rounded-full" style={{ backgroundColor: colors.purple }}>
                 <Ionicons name={isNumeracy ? "calculator" : step === "write" ? "pencil" : step === "trace" ? "brush" : "help"} size={18} color="#fff" />
               </View>
-              <Text className="text-[22px] font-black" style={{ color: colors.purple }}>{isNumeracy ? `LISSAFI ${idx + 1}` : title}</Text>
+              <Text className="text-[22px] font-black" style={{ color: colors.purple }}>{title}</Text>
             </View>
 
             {/* step pager dots */}
@@ -112,7 +159,12 @@ export default function QuizScreen() {
 
             {isNumeracy && (
               <View className="mt-4">
-                <NumeracyQuiz stepIndex={idx} onDone={(ok) => setNumDone(ok)} />
+                <NumeracyQuiz
+                  stepIndex={idx}
+                  lessonId={active?.id ?? ""}
+                  solved={!!solved[step]}
+                  onAnswer={(value, correct) => answer(step, value, correct)}
+                />
               </View>
             )}
 
@@ -126,16 +178,21 @@ export default function QuizScreen() {
                 <Text className="mt-2 text-center text-[14px]" style={{ color: colors.ink }}>{content.prompt}</Text>
                 <View className="mt-3 flex-row flex-wrap justify-center gap-3">
                   {choiceOptions.map((o, i) => {
-                    const picked = choice === o.label;
+                    const isPicked = picked.choice === o.label;
+                    const right = isPicked && !!o.correct;
+                    const wrong = isPicked && !o.correct;
                     return (
-                      <Pressable key={i} onPress={() => { setChoice(o.label); o.correct ? feedback.correct() : feedback.wrong(); }}
+                      <Pressable key={i} onPress={() => answer("choice", o.label, !!o.correct)}
                         className="items-center justify-center rounded-2xl p-3"
-                        style={{ minWidth: 130, minHeight: 68, borderWidth: 2, borderColor: picked ? (o.correct ? colors.green : colors.red) : colors.line, backgroundColor: picked && o.correct ? "#EAF6E0" : "#fff" }}>
+                        style={{ flexGrow: 1, flexBasis: narrow ? "45%" : 130, minHeight: 68, borderWidth: 2, borderColor: right ? colors.green : wrong ? colors.red : colors.line, backgroundColor: right ? "#EAF6E0" : "#fff" }}>
                         <Text className="text-[16px] font-black" style={{ color: colors.ink }}>{o.label}</Text>
                       </Pressable>
                     );
                   })}
                 </View>
+                {picked.choice !== undefined && !solved.choice && (
+                  <Text className="mt-3 text-center text-[12.5px] font-bold" style={{ color: colors.red }}>Ba haka ba ne · Ka sake gwadawa</Text>
+                )}
               </View>
             )}
 
@@ -143,28 +200,29 @@ export default function QuizScreen() {
               <View className="mt-4">
                 <Text className="text-center text-[14px] font-bold" style={{ color: colors.ink }}>Danna kalmar da ta dace da hoton.</Text>
                 <View className="mt-3 items-center justify-center rounded-2xl" style={{ height: 150, backgroundColor: colors.purpleSoft }}>
-                  {LESSON_ART[content.visual]
-                    ? <Image source={LESSON_ART[content.visual]} style={{ width: 118, height: 118 }} resizeMode="contain" />
+                  {lessonArt
+                    ? <Image source={lessonArt} style={{ width: 118, height: 118 }} resizeMode="contain" />
                     : <Text style={{ fontSize: 84 }}>{content.visual}</Text>}
                 </View>
                 <View className="mt-3 flex-row flex-wrap justify-center gap-3">
                   {matchOptions.map((o, i) => {
-                    const show = match === o.label && o.correct;
-                    const wrong = match === o.label && !o.correct;
+                    const isPicked = picked.match === o.label;
+                    const right = isPicked && !!o.correct;
+                    const wrong = isPicked && !o.correct;
                     return (
-                      <Pressable key={i} onPress={() => { setMatch(o.label); o.correct ? feedback.correct() : feedback.wrong(); }}
+                      <Pressable key={i} onPress={() => answer("match", o.label, !!o.correct)}
                         className="items-center justify-center rounded-2xl p-3"
-                        style={{ minWidth: 130, minHeight: 62, borderWidth: 2, borderColor: show ? colors.green : wrong ? colors.red : colors.line, backgroundColor: show ? "#EAF6E0" : "#fff" }}>
+                        style={{ flexGrow: 1, flexBasis: narrow ? "45%" : 130, minHeight: 62, borderWidth: 2, borderColor: right ? colors.green : wrong ? colors.red : colors.line, backgroundColor: right ? "#EAF6E0" : "#fff" }}>
                         <Text className="text-[15px] font-bold" style={{ color: colors.ink }}>{o.label}</Text>
                       </Pressable>
                     );
                   })}
                 </View>
-                {match && (
+                {solved.match && (
                   <PopIn style={{ marginTop: 12, alignSelf: "center" }}>
                     <View className="flex-row items-center gap-2 rounded-2xl px-4 py-2" style={{ backgroundColor: colors.purpleSoft }}>
                       <Ionicons name="star" size={16} color={colors.gold} />
-                      <Text className="text-[13px] font-bold" style={{ color: colors.purple }}>Madalla! Ka yi daidai. Ka samu maki 1.</Text>
+                      <Text className="text-[13px] font-bold" style={{ color: colors.purple }}>Madalla! Ka yi daidai.</Text>
                     </View>
                   </PopIn>
                 )}
@@ -173,34 +231,38 @@ export default function QuizScreen() {
 
             {!isNumeracy && step === "write" && (
               <View className="mt-4">
-                <Text className="text-[13px] font-bold" style={{ color: colors.ink }}>Ka kalli hoton sannan ka rubuta jimla mai ma'ana.</Text>
+                <Text className="text-[13px] font-bold" style={{ color: colors.ink }}>Ka kalli hoton sannan ka rubuta jimla mai ma’ana.</Text>
                 <Text className="mb-2 text-[12px] font-bold" style={{ color: colors.purple }}>Rubuta a akwatin rubutu da ke kasa.</Text>
-                <View className="items-center justify-center rounded-2xl" style={{ height: 140, backgroundColor: "#F3E9D6" }}>
-                  <Text style={{ fontSize: 60 }}>✏️📖</Text>
+                <View className="flex-row items-center justify-center gap-4 rounded-2xl" style={{ height: 140, backgroundColor: "#F3E9D6" }}>
+                  <Image source={objects.pencil} style={{ width: 72, height: 72 }} resizeMode="contain" />
+                  {lessonArt && <Image source={lessonArt} style={{ width: 82, height: 82 }} resizeMode="contain" />}
                 </View>
                 <View className="mt-3 rounded-2xl p-3" style={{ borderWidth: 2, borderColor: colors.purpleSoft }}>
                   <TextInput value={text} onChangeText={(t) => setText(t.slice(0, 60))} multiline placeholder="Rubuta jimlarka a nan..." placeholderTextColor={colors.inkSoft}
                     style={{ minHeight: 80, color: colors.ink, textAlignVertical: "top" }} />
                   <Text className="text-right text-[10px]" style={{ color: colors.inkSoft }}>{text.length} / 60</Text>
                 </View>
+                <Text className="mt-2 text-[11px]" style={{ color: colors.inkSoft }}>
+                  Wannan aikin rubutu ne — malaminka zai duba shi. Ba a ba da maki a nan.
+                </Text>
               </View>
             )}
 
             {!isNumeracy && step === "trace" && (
               <View className="mt-4">
                 <Text className="text-[13px] font-bold" style={{ color: colors.ink }}>Bi layin dot-dot din don rubuta kalmar daidai.</Text>
-                <View className="mt-2 flex-row items-center gap-2">
+                <Pressable onPress={() => speak(content.word)} className="mt-2 flex-row items-center gap-2">
                   <View className="h-8 w-8 items-center justify-center rounded-full" style={{ backgroundColor: colors.purple }}>
                     <Ionicons name="volume-medium" size={14} color="#fff" />
                   </View>
-                  <Text className="text-[13px] font-bold" style={{ color: colors.purple }}>Ka saurari: Sannu</Text>
-                </View>
+                  <Text className="text-[13px] font-bold" style={{ color: colors.purple }}>Ka saurari: {content.word}</Text>
+                </Pressable>
                 <View className="mt-3 items-center justify-center rounded-2xl" style={{ height: 120, backgroundColor: "#CDEBD3" }}>
-                  <View className="rounded-2xl bg-white px-4 py-2"><Text className="text-[18px] font-black" style={{ color: colors.purple }}>Sannu!</Text></View>
+                  <View className="rounded-2xl bg-white px-4 py-2"><Text className="text-[18px] font-black" style={{ color: colors.purple }}>{content.word}</Text></View>
                 </View>
                 <View className="mt-3 rounded-2xl p-4" style={{ borderWidth: 2, borderColor: colors.purpleSoft }}>
-                  <View className="flex-row justify-center gap-1">
-                    {"Sannu".split("").map((c, i) => (
+                  <View className="flex-row flex-wrap justify-center gap-1">
+                    {content.word.split("").map((c, i) => (
                       <View key={i} className="h-14 w-11 items-center justify-center rounded-lg" style={{ borderWidth: 2, borderStyle: "dashed", borderColor: colors.purple }}>
                         <Text className="text-[26px] font-black" style={{ color: "#C9BEEA" }}>{c}</Text>
                       </View>
@@ -214,10 +276,10 @@ export default function QuizScreen() {
               </View>
             )}
 
-            <View className="mt-4 flex-row items-center gap-2 rounded-2xl px-4 py-2" style={{ backgroundColor: colors.purpleSoft }}>
+            <Pressable onPress={() => speak(hint)} className="mt-4 flex-row items-center gap-2 rounded-2xl px-4 py-2" style={{ backgroundColor: colors.purpleSoft }}>
               <Ionicons name="volume-medium" size={16} color={colors.purple} />
               <Text className="flex-1 text-[12px]" style={{ color: colors.ink }}>{hint}</Text>
-            </View>
+            </Pressable>
           </View>
 
           <View className="mt-5 flex-row items-center justify-between">
@@ -226,26 +288,28 @@ export default function QuizScreen() {
               <Text className="text-[14px] font-bold" style={{ color: colors.ink }}>KOMA BAYAN</Text>
             </Pressable>
             <Pressable disabled={!done} onPress={next} className="flex-row items-center gap-2 rounded-full px-8 py-3" style={{ backgroundColor: done ? colors.purple : colors.line }}>
-              <Text className="text-[14px] font-black" style={{ color: done ? "#fff" : colors.inkSoft }}>{idx === STEPS.length - 1 ? "KA MIKA AMSA" : "NA GABA"}</Text>
-              <Ionicons name={idx === STEPS.length - 1 ? "checkmark" : "arrow-forward"} size={16} color={done ? "#fff" : colors.inkSoft} />
+              <Text className="text-[14px] font-black" style={{ color: done ? "#fff" : colors.inkSoft }}>{isLast ? "KA MIKA AMSA" : "NA GABA"}</Text>
+              <Ionicons name={isLast ? "checkmark" : "arrow-forward"} size={16} color={done ? "#fff" : colors.inkSoft} />
             </Pressable>
           </View>
         </ScrollView>
 
         {showRail && (
           <RightRail
-            ciGaba={isNumeracy ? Math.round(((idx + 1) / totalSteps) * 100) : step === "write" || step === "trace" ? 40 : undefined}
-            ciGabaLabel={isNumeracy ? `Ka kammala ${idx + 1} daga ${totalSteps}` : step === "write" ? "Ka kammala 1 daga 5" : step === "trace" ? "Ka kammala 1 daga 5" : undefined}
-            star={!isNumeracy && step === "choice" ? 1 : undefined}
-            starTotal={3}
-            maki={isNumeracy ? `${idx} / ${totalSteps}` : step === "match" ? "2 / 5" : step === "write" || step === "trace" ? "1 / 5" : undefined}
+            ciGaba={Math.round((idx / totalSteps) * 100)}
+            ciGabaLabel={`Ka kammala ${idx} daga ${totalSteps}`}
+            maki={`${correctFirstTime} / ${gradedSteps.length}`}
             hint={hint}
-            startSeconds={isNumeracy ? 60 : step === "write" ? 265 : step === "trace" ? 270 : 45}
           />
         )}
       </View>
 
-      <Celebration visible={celebrate} xp={earnedXp} onClose={() => { setCelebrate(false); router.replace("/home"); }} />
+      <Celebration
+        visible={celebrate}
+        stars={earnedStars}
+        xp={earnedStars * 10}
+        onClose={() => { setCelebrate(false); router.replace("/home"); }}
+      />
     </AppShell>
   );
 }

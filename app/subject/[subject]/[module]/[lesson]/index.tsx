@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { View, Text, Pressable, ScrollView, useWindowDimensions, Image } from "react-native";
+import { useState, useCallback, useEffect } from "react";
+import { View, Text, Pressable, ScrollView, useWindowDimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { router, useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams, useFocusEffect } from "expo-router";
 import { colors, NAV } from "@/constants/theme";
 import { SUBJECTS, MODULES, getLessons, LESSON_SUBTITLES } from "@/constants/content";
 import { contentFor } from "@/constants/lessonContent";
-import { objects, lessonVideo } from "@/constants/images";
+import { artForVisual, lessonVideo } from "@/constants/images";
 import LessonMedia, { AudioBar } from "@/components/LessonMedia";
-import { getSessionChildId, getDevice, logEvent } from "@/lib/data";
+import { getSessionChildId, getDevice, logEvent, getLessonStates, type LessonState } from "@/lib/data";
 import AppShell from "@/components/nav/AppShell";
 import { speak } from "@/lib/speech";
 import { feedback } from "@/lib/feedback";
@@ -19,25 +19,6 @@ const OPTION_COLORS = [
   { color: colors.orange, tint: "#FBEEDD" },
 ];
 
-// Maps a lesson's placeholder symbol to real designer artwork.
-// Anything not listed here falls back to the symbol itself.
-const OBJECT_ART: Record<string, any> = {
-  "🍎": objects.apple,
-  "🪑": objects.chair,
-  "☕": objects.cup,
-  "✏️": objects.pencil,
-  "🐦": objects.bird,
-  "📖": objects.bookOpen,
-  "🅰️": objects.bookAb,
-  "🐕": objects.dog,
-  "👩": objects.mother,
-  "🧼": objects.soap,
-  "🏃": objects.running,
-  "🪥": objects.toothbrush,
-  "🍽️": objects.plate,
-  "🐟": objects.fish,
-};
-
 export default function LessonScreen() {
   const { subject, module, lesson } = useLocalSearchParams<{ subject: string; module: string; lesson: string }>();
   const meta = SUBJECTS.find((s) => s.id === subject) ?? SUBJECTS[0];
@@ -46,6 +27,35 @@ export default function LessonScreen() {
   const active = lessons.find((l) => l.id === lesson) ?? lessons[0];
   const content = contentFor(meta.id, module as string, active.id, active.ha, lessons);
   const [sel, setSel] = useState<string | null>(null);
+  const [correct, setCorrect] = useState(false);
+
+  // The teaching screen showed no reaction to a wrong tap and let the child
+  // continue anyway. It now confirms the right answer before moving on — this
+  // is the teach step, so the point is to land the answer, not to score it.
+  // Switching lessons from the rail replaces the route without unmounting the
+  // screen, so the previous lesson's selection has to be cleared explicitly.
+  useEffect(() => { setSel(null); setCorrect(false); }, [active?.id]);
+
+  const choose = (label: string, isCorrect: boolean) => {
+    setSel(label);
+    speak(label);
+    if (isCorrect) { setCorrect(true); feedback.correct(); }
+    else { feedback.wrong(); }
+  };
+
+  // The lesson rail used to read `done`/`locked` straight off the static
+  // content catalogue, so it contradicted the module screen next to it. Both
+  // now derive from the child's recorded progress.
+  const [states, setStates] = useState<LessonState[]>([]);
+  useFocusEffect(useCallback(() => {
+    let alive = true;
+    (async () => {
+      const childId = await getSessionChildId();
+      const s = await getLessonStates(childId, meta.id, module as string);
+      if (alive) setStates(s);
+    })();
+    return () => { alive = false; };
+  }, [meta.id, module]));
 
   // FR-5.3: replay counts are logged — they signal which lessons children
   // find hard, which feeds content improvement.
@@ -87,7 +97,7 @@ export default function LessonScreen() {
             <View className="mt-4">
               <LessonMedia
                 video={lessonVideo[`${module}/${active?.id}`]}
-                poster={OBJECT_ART[content.visual]}
+                poster={artForVisual(content.visual)}
                 word={content.word}
                 sentence={content.hint}
                 onReplay={countReplay}
@@ -104,18 +114,25 @@ export default function LessonScreen() {
             <View className="mt-4 flex-row flex-wrap justify-center gap-3">
               {content.options.map((o, i) => {
                 const c = OPTION_COLORS[i % OPTION_COLORS.length];
+                const isSel = sel === o.label;
+                const right = isSel && !!o.correct;
+                const wrong = isSel && !o.correct;
                 return (
-                  <Bounce key={i} onPress={() => { setSel(o.label); speak(o.label); }}
+                  <Bounce key={i} onPress={() => choose(o.label, !!o.correct)}
                     className="flex-row items-center gap-3 rounded-3xl px-6"
-                    style={{ minHeight: 68, backgroundColor: sel === o.label ? c.tint : "#fff", borderWidth: 2.5, borderColor: c.color }}>
-                    <View className="h-9 w-9 items-center justify-center rounded-full" style={{ backgroundColor: c.color }}>
-                      <Ionicons name="volume-medium" size={18} color="#fff" />
+                    style={{ minHeight: 68, backgroundColor: right ? "#EAF6E0" : isSel ? c.tint : "#fff",
+                             borderWidth: 2.5, borderColor: right ? colors.green : wrong ? colors.red : c.color }}>
+                    <View className="h-9 w-9 items-center justify-center rounded-full" style={{ backgroundColor: right ? colors.green : c.color }}>
+                      <Ionicons name={right ? "checkmark" : "volume-medium"} size={18} color="#fff" />
                     </View>
                     <Text className="text-[18px] font-black" style={{ color: colors.ink }}>{o.label}</Text>
                   </Bounce>
                 );
               })}
             </View>
+            {sel !== null && !correct && (
+              <Text className="mt-3 text-center text-[12.5px] font-bold" style={{ color: colors.red }}>Ba haka ba ne · Ka sake gwadawa</Text>
+            )}
 
             <View className="mt-4 flex-row items-center gap-2 rounded-2xl px-4 py-3" style={{ backgroundColor: "#F3F7E8" }}>
               <Ionicons name="bulb" size={16} color={colors.gold} />
@@ -131,10 +148,10 @@ export default function LessonScreen() {
               <Ionicons name="arrow-back" size={16} color={colors.ink} />
               <Text className="text-[14px] font-bold" style={{ color: colors.ink }}>GABANIN</Text>
             </Pressable>
-            <Pressable disabled={!sel} onPress={() => router.push(`/subject/${meta.id}/${module}/${lesson}/quiz`)}
-              className="flex-row items-center gap-2 rounded-full px-8 py-3" style={{ backgroundColor: sel ? colors.purple : colors.line }}>
-              <Text className="text-[14px] font-black" style={{ color: sel ? "#fff" : colors.inkSoft }}>NA GABA</Text>
-              <Ionicons name="arrow-forward" size={16} color={sel ? "#fff" : colors.inkSoft} />
+            <Pressable disabled={!correct} onPress={() => router.push(`/subject/${meta.id}/${module}/${lesson}/quiz`)}
+              className="flex-row items-center gap-2 rounded-full px-8 py-3" style={{ backgroundColor: correct ? colors.purple : colors.line }}>
+              <Text className="text-[14px] font-black" style={{ color: correct ? "#fff" : colors.inkSoft }}>NA GABA</Text>
+              <Ionicons name="arrow-forward" size={16} color={correct ? "#fff" : colors.inkSoft} />
             </Pressable>
           </View>
         </ScrollView>
@@ -144,7 +161,7 @@ export default function LessonScreen() {
           <View className="w-[230px] px-3 py-4">
             <View className="rounded-3xl bg-white p-3" style={{ borderWidth: 1, borderColor: colors.line }}>
               <Text className="mb-2 px-1 text-[12px] font-black tracking-wider" style={{ color: colors.ink }}>DARUSSA</Text>
-              {lessons.map((l) => {
+              {states.map((l) => {
                 const isActive = l.id === active.id;
                 return (
                   <Pressable key={l.id} disabled={l.locked} onPress={() => router.replace(`/subject/${meta.id}/${module}/${l.id}`)}

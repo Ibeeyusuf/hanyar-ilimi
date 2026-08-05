@@ -4,8 +4,10 @@ import { Platform } from "react-native";
 
 /**
  * Central sound + haptic feedback.
- * Sound files live in assets/sounds/ (see assets/sounds/README for free
- * sources). If a file is missing the app still runs — sound just no-ops.
+ *
+ * The four cues live in assets/sounds/ and are bundled with the app. They must
+ * exist: Metro resolves require() statically, so a missing file breaks the
+ * build rather than degrading at runtime.
  */
 
 let enabled = true;
@@ -24,28 +26,18 @@ function tryLoad(key: string, mod: any) {
   return players[key];
 }
 
-// Each entry wrapped in try/require so a missing file is tolerated.
-function sourceFor(key: SoundKey): any | null {
-  try {
-    switch (key) {
-      case "tap": return require("@/assets/sounds/tap.mp3");
-      case "correct": return require("@/assets/sounds/correct.mp3");
-      case "wrong": return require("@/assets/sounds/wrong.mp3");
-      case "success": return require("@/assets/sounds/success.mp3");
-      default: return null;
-    }
-  } catch {
-    return null;
-  }
-}
-
 export type SoundKey = "tap" | "correct" | "wrong" | "success";
+
+const SOURCES: Record<SoundKey, any> = {
+  tap: require("@/assets/sounds/tap.wav"),
+  correct: require("@/assets/sounds/correct.wav"),
+  wrong: require("@/assets/sounds/wrong.wav"),
+  success: require("@/assets/sounds/success.wav"),
+};
 
 export function play(key: SoundKey) {
   if (!enabled) return;
-  const src = sourceFor(key);
-  if (!src) return;
-  const p = tryLoad(key, src);
+  const p = tryLoad(key, SOURCES[key]);
   if (!p) return;
   try {
     p.seekTo(0);

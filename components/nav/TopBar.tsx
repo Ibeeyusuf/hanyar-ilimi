@@ -1,12 +1,12 @@
 import { View, Text, Pressable, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
 import { colors } from "@/constants/theme";
 import { elevation, surface } from "@/constants/ui";
-import { navIcons, avatarSet } from "@/constants/images";
+import { navIcons } from "@/constants/images";
+import ChildPortrait from "@/components/ChildPortrait";
 import { useState, useCallback } from "react";
-import { useFocusEffect } from "expo-router";
-import { getSessionChildId, getChild, getChildren, getTotalStars, type Child } from "@/lib/data";
+import { getSessionChildId, getChild, getTotalStars, type Child } from "@/lib/data";
 import { useNav } from "@/components/nav/NavContext";
 
 export type Crumb = { label: string; color?: string; href?: string; active?: boolean };
@@ -15,19 +15,15 @@ export default function TopBar({ crumbs, showMenu }: { crumbs: Crumb[]; showMenu
   // The signed-in child — name, star total and portrait, all real.
   const [me, setMe] = useState<Child | null>(null);
   const [stars, setStars] = useState(0);
-  const [face, setFace] = useState<any>(null);
   useFocusEffect(useCallback(() => {
     let alive = true;
     (async () => {
       const id = await getSessionChildId();
       const c = id ? await getChild(id) : undefined;
       const total = await getTotalStars(id);
-      const all = await getChildren();
-      const idx = Math.max(0, all.findIndex((x) => x.id === id));
       if (!alive) return;
       setMe(c ?? null);
       setStars(total);
-      setFace(avatarSet[idx % avatarSet.length]);
     })();
     return () => { alive = false; };
   }, []));
@@ -68,10 +64,7 @@ export default function TopBar({ crumbs, showMenu }: { crumbs: Crumb[]; showMenu
           <Text className="text-[12px] font-extrabold" style={{ color: colors.ink }}>{me?.name ?? "—"}</Text>
           <Text className="text-[10px]" style={{ color: colors.inkSoft }}>{stars} ⭐</Text>
         </View>
-        <View className="h-10 w-10 items-center justify-center overflow-hidden rounded-2xl" style={{ backgroundColor: colors.purpleSoft, borderWidth: 2, borderColor: colors.purple }}>
-          {face ? <Image source={face} style={{ width: 38, height: 38 }} resizeMode="cover" />
-                : <Ionicons name="happy" size={22} color={colors.purple} />}
-        </View>
+        <ChildPortrait child={me} size={40} ringColor={colors.purple} ringWidth={2} />
       </Pressable>
     </View>
   );

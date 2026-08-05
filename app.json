@@ -29,6 +29,13 @@
       "expo-font",
       "expo-secure-store",
       [
+        "expo-image-picker",
+        {
+          "photosPermission": "Hanyar Ilimi uses photos so a facilitator can set a child's login portrait. Photos stay on this tablet.",
+          "cameraPermission": "Hanyar Ilimi uses the camera so a facilitator can take a child's login portrait. Photos stay on this tablet."
+        }
+      ],
+      [
         "expo-splash-screen",
         {
           "image": "./assets/images/splash-icon.png",
@@ -44,8 +51,9 @@
     "runtimeVersion": {
       "policy": "appVersion"
     },
+    "_comment_updates": "Over-the-air updates need a `url` and an `extra.eas.projectId`, both written by `npx eas-cli update:configure`. Until that command has been run this MUST stay false: expo-updates starts in a release build, finds nowhere to fetch from, and takes the app down on launch. After running it, set enabled to true and rebuild once so the url is compiled into the native app. Note that runtimeVersion follows `version`, so bumping version to 1.0.1 cuts every 1.0.0 device off from updates.",
     "updates": {
-      "enabled": true,
+      "enabled": false,
       "fallbackToCacheTimeout": 0
     }
   }
